@@ -1,11 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, Form, status
-from fastapi.responses import HTMLResponse, Response, RedirectResponse
+from fastapi import APIRouter, Depends, HTTPException, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from .. import schemas, crud, auth
 from ..database import get_db
 from ..config import templates
-from typing import Optional
 
 router = APIRouter()
 

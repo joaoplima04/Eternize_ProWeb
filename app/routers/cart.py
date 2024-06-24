@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
-from fastapi.responses import HTMLResponse, RedirectResponse, Response, JSONResponse
+from fastapi.responses import HTMLResponse, Response
 from sqlalchemy.orm import Session
 from ..database import get_db
 from ..models import Produto, ItemCarrinho
