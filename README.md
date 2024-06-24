@@ -54,6 +54,7 @@ Este é o README do projeto de API web Market Place, desenvolvido para a discipl
  ```bash
     SECRET_KEY = "sua_secret_key"
     ```
+
 ## Uso da API
 ### Endpoints:
 1. **Visualização do Carrinho**:
