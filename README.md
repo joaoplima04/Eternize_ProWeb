@@ -5,14 +5,23 @@ Este é o README do projeto de API web Market Place, desenvolvido para a discipl
 
 ## Funcionalidades
 ● **Visualização do Carrinho**: Permite que usuários visualizem os itens no carrinho de compras.
+
 ● **Adicionar ao Carrinho**: Adiciona um produto específico ao carrinho.
+
 ● **Remover do Carrinho**: Remove um produto específico do carrinho.
+
 ● **Atualizar Quantidade**: Atualiza a quantidade de um produto no carrinho.
+
 ● **Visualização de Categorias**: Permite a visualização de produtos por categoria.
+
 ● **Cadastro de Usuário**: Permite que novos usuários se cadastrem na plataforma.
+
 ● **Login de Usuário**: Permite que usuários registrados façam login.
+
 ● **Logout de Usuário**: Permite que usuários façam logout.
+
 ● **Controle de acesso**: Controla as seções da aplicação que o usuário é permitido de acordo com um token JWC que é armazenado nos cookies do navegador.
+
 ● **Criação de Produtos**: Permite que novos produtos sejam adicionados ao catálogo.
 
 ## Requisitos
