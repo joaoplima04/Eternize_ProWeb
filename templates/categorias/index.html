@@ -1,0 +1,71 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+  <section class="produtos">
+    {% if welcome_message %}
+    <div class="alert alert-success" role="alert">
+        {{ welcome_message }}
+    </div>
+    {% endif %}
+    <h2 class="titulo">Alugue os mais elegantes itens de mesa posta!</h2>
+    <h2 class="titulo">Produtos</h2>
+  </section>
+  <section class="cards_container">
+    <section class="cardsSection1">
+      <a target="_blank" href="/categories/categoria/GUARDANAPO" class="ancor">
+      <div class=cards>
+        <img src='/static/images/guardanapos.png' class="imagem">
+        <p class="dg">Guardanapos</p>
+      </div>
+      </a>
+      <a target="_blank" href="/categories/categoria/SOUSPLAT" class="ancor">
+      <div class=cards>
+        <img src='/static/images/sousplats.png' class="imagem">
+        <p class="dg">Sousplats</p>
+      </div>
+      </a>
+      <a target="_blank" href="/categoria/JOGO_AMERICANO" class="ancor">
+      <div class=cards>
+        <img src='/static/images/jogos_americanos.png' class="imagem">
+        <p class="dg">Jogos americanos</p>
+      </div>
+      </a>
+      <a target="_blank" href="/categories/categoria/PRATO_RASO" class="ancor">
+      <div class=cards>
+        <img src='/static/images/pratos.png' class="imagem">
+        <p class="dg">Pratos Rasos</p>
+      </div>
+      </a>
+      <a target="_blank" href="" class="ancor">
+      <div class=cards>
+        <img src='/static/images/porta_guardanapos.png' class="imagem">
+        <p class="dg">Porta guardanapos</p>
+      </div>
+      </a>
+      <a target="_blank" href=""class="ancor">
+      <div class=cards>
+        <img src='/static/images/tacas.png' class="imagem">
+        <p class="dg">Taças</p>
+      </div>
+      </a>
+      <a target="_blank" href=""class="ancor">
+      <div class=cards>
+        <img src='/static/images/talheres.png' class="imagem">
+        <p class="dg">Talheres</p>
+      </div>
+      </a>
+      <a target="_blank" href="" class="ancor">
+      <div class=cards>
+        <img src='/static/images/trilhos.png' class="imagem">
+        <p class="dg">Trilhos de Mesa</p>
+      </div>
+      </a>
+      <a target="_blank" href="" class="ancor">
+      <div class=cards>
+        <img src='/static/images/cafedatarde.png' class="imagem">
+        <p class="dg">Café e Chá da Tarde</p>
+      </div>
+      </a>
+    </section>
+  </section>
+{% endblock %}

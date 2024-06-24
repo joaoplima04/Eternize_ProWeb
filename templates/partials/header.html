@@ -1,0 +1,46 @@
+
+<body>
+  <header class="container-fluid p-3 bg-light fixed-top">
+    <nav class="row align-items-center">
+      <div class="col-3">
+        <a href="/">
+          <img src="{{url_for('static', path='/images/logo.png')}}" class="logo img-fluid">
+        </a>
+      </div>
+      <div class="col-6">
+        <div class="d-flex">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/categories/categoria/GUARDANAPO">Guardanapos</a></li>
+            <li><a class="dropdown-item" href="/categories/categoria/GUARDANAPO">Prato Raso</a></li>
+            <li><a class="dropdown-item" href="">Talheres</a></li>
+            <li><a class="dropdown-item" href="">Taças</a></li>
+            <li><a class="dropdown-item" href="">Trilhos de Mesa</a></li>
+            <li><a class="dropdown-item" href="/categories/categoria/SOUSPLAT">Sousplat</a></li>
+            <li><a class="dropdown-item" href="">Jogo Americano</a></li>
+            <li><a class="dropdown-item" href="">Chá e Café</a></li>
+            <li><a class="dropdown-item" href="">Pratos Sobremesa</a></li>
+            <li><a class="dropdown-item" href="">Porta Guardanapo</a></li>
+          </ul>
+          <form class="ms-auto d-flex">
+            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="d-flex justify-content-end">
+          <a href="/users/cadastro" class="btn btn-outline-primary">
+            <span class="material-symbols-outlined">person</span> Conta
+          </a>
+          <a href="/cart/" class="btn btn-outline-primary">
+            <span class="material-symbols-outlined">shopping_cart</span> Carrinho
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+

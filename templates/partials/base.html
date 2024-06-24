@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <title>{% block title %}Eternize{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='styles/style.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+    body {
+        padding-top: 80px; /* Adjust based on the height of the fixed header */
+    }
+    .logo {
+        max-height: 50px; /* Adjust the logo height */
+        width: auto; /* Maintain aspect ratio */
+    }
+    nav a.nav-link.dropdown-toggle {
+        color: black;
+    }
+    .dropdown-menu a.dropdown-item {
+        color: black;
+    }
+    .btn-outline-primary {
+        display: flex;
+        align-items: center;
+    }
+    .btn-outline-primary .material-symbols-outlined {
+        margin-right: 5px;
+    }
+    main {
+        position: relative;
+        top: 100px;
+    }
+    .text-center.mb-5 {
+        color: white;
+        position: relative;
+        bottom: 50px;
+    }
+    .fixed-size-card {
+        width: 18rem; /* Set a fixed width for the cards */
+        height: 30rem; /* Set a fixed height for the cards */
+    }
+    .card-img-top {
+        max-height: 280px; /* Adjust as needed */
+        object-fit: cover; /* Maintain aspect ratio while covering the area */
+    }
+    .text-right {
+        color: white;
+    }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        {% include "partials/header.html" %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

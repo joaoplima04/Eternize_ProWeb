@@ -1,0 +1,53 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+<section class="produtos">
+    <div id="alert-container" style="display: none; position: fixed; top: 200px; right: 300px; z-index: 1000;">
+        <div class="alert alert-success" role="alert">
+            Item adicionado ao carrinho. <a href="{{ url_for('cart_view') }}" class="alert-link">Ir ao carrinho</a>
+        </div>
+    </div>    
+    <h2 class="titulo">{{ categoria }}</h2>
+</section>
+<section class="cards_container">
+    <section class="cardsSection1">
+        {% for produto in produtos %}
+        <div class="cards">
+            <img src="{{ url_for('static', path=produto.imagem) }}" class="imagem2">
+            <p class="dg">{{ produto.nome }}</p>
+            <a href="#" class="ancor" onclick="event.preventDefault(); addToCart({{ produto.id }});">Alugar</a>
+        </div>
+        {% endfor %}
+    </section>
+</section>
+
+<script>
+function addToCart(produtoId) {
+    fetch(`/cart/add_to_cart/${produtoId}/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            showAlert();
+        } else {
+            console.error("Failed to add to cart");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
+function showAlert() {
+    const alertContainer = document.getElementById('alert-container');
+    alertContainer.style.display = 'block';
+    setTimeout(() => {
+        alertContainer.style.display = 'none';
+    }, 5000); // Hide alert after 5 seconds
+}
+</script>
+
+{% endblock %}
