@@ -51,7 +51,7 @@ Este é o README do projeto de API web Market Place, desenvolvido para a discipl
     pip install -r requirements.txt
     ```
 4. Configure as variáveis de ambiente no arquivo `.env`.
- ```bash
+     ```bash
     SECRET_KEY = "sua_secret_key"
     ```
 
