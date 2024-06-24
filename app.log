@@ -872,3 +872,20 @@ Traceback (most recent call last):
 AttributeError: module 'bcrypt' has no attribute '__about__'
 2024-06-24 10:20:47,161 [DEBUG] passlib.handlers.bcrypt: detected 'bcrypt' backend, version '<unknown>'
 2024-06-24 10:20:47,161 [DEBUG] passlib.handlers.bcrypt: 'bcrypt' backend lacks $2$ support, enabling workaround
+2024-06-24 10:24:29,975 [DEBUG] multipart.multipart: Calling on_field_start with no data
+2024-06-24 10:24:29,975 [DEBUG] multipart.multipart: Calling on_field_name with data[0:5]
+2024-06-24 10:24:29,976 [DEBUG] multipart.multipart: Calling on_field_data with data[6:22]
+2024-06-24 10:24:29,976 [DEBUG] multipart.multipart: Calling on_field_end with no data
+2024-06-24 10:24:29,976 [DEBUG] multipart.multipart: Calling on_field_start with no data
+2024-06-24 10:24:29,977 [DEBUG] multipart.multipart: Calling on_field_name with data[23:31]
+2024-06-24 10:24:29,977 [DEBUG] multipart.multipart: Calling on_field_data with data[32:35]
+2024-06-24 10:24:29,978 [DEBUG] multipart.multipart: Calling on_field_end with no data
+2024-06-24 10:24:29,979 [DEBUG] multipart.multipart: Calling on_end with no data
+2024-06-24 10:24:30,072 [WARNING] passlib.handlers.bcrypt: (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\jaoja\Desktop\Eternize_ProWeb\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-06-24 10:24:30,075 [DEBUG] passlib.handlers.bcrypt: detected 'bcrypt' backend, version '<unknown>'
+2024-06-24 10:24:30,075 [DEBUG] passlib.handlers.bcrypt: 'bcrypt' backend lacks $2$ support, enabling workaround
