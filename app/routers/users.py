@@ -80,25 +80,26 @@ def get_login(request: Request, db: Session = Depends(get_db)):
     else:
         # Trata o caso onde não há usuário logado ou o token é inválido
         context = {
-            "request": request
+            "request": request,
+            "next": "/"
         }
         return templates.TemplateResponse("categorias/login.html", context)
 
 
 @router.post("/login_user/")
-def login(email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+def login(email: str = Form(...), password: str = Form(...), next: str = Form(...), db: Session = Depends(get_db)):
     user = crud.get_cliente(db, cliente_email=email)
     if not user:
-        response = RedirectResponse(url="/users/login", status_code=303)
+        response = RedirectResponse(url=f"/users/login?next={next}", status_code=303)
         response.set_cookie(key="error", value=f"Email incorreto", max_age=3600)
         return response
     if not auth.verify_password(password, user.password):
-        response = RedirectResponse(url="/users/login", status_code=303)
+        response = RedirectResponse(url=f"/users/login?next={next}", status_code=303)
         response.set_cookie(key="error", value=f"senha incorreta", max_age=3600)
         return response
-    
+
     access_token = auth.create_access_token(data={"sub": user.email}, expires_delta=timedelta(minutes=60))
-    response = RedirectResponse(url="/", status_code=303)
+    response = RedirectResponse(url=next, status_code=303)
     response.set_cookie(key="welcome_message", value=f"Bem vindo {user.nome}!", max_age=3600)
     response.set_cookie(key="access_token", value=access_token, httponly=True, max_age=3600)
     return response

@@ -24,7 +24,8 @@ def cart_view(request: Request, db: Session = Depends(get_db)):
         context = {
             "type": "1",
             "message": "Para acessar o carrinho é preciso estar logado.",
-            "request": request
+            "request": request,
+            "next": "/cart/"
         }
         return templates.TemplateResponse("categorias/login.html", context)
     cart_items = db.query(ItemCarrinho).all()
