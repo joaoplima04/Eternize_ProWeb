@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean, Enum, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean, Enum, Float, Time
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import enum
@@ -59,8 +59,13 @@ class Aluguel(Base):
     cliente_cpf = Column(String(11), ForeignKey('cliente.cpf'))
     cliente = relationship("Cliente")
     data_aluguel = Column(Date)
+    hora_inicial = Column(Time)
     data_devolucao = Column(Date)
+    hora_final = Column(Time)
     preco_total = Column(Float)
+
+    entrega = relationship("Entrega", uselist=False, back_populates="aluguel")
+    itens_carrinho = relationship("ItemCarrinho", back_populates="aluguel")
 
     def __repr__(self):
         return f"<Aluguel(cliente_cpf='{self.cliente_cpf}', data_aluguel='{self.data_aluguel}', data_devolucao='{self.data_devolucao}', preco_total={self.preco_total})>"
@@ -73,3 +78,24 @@ class ItemCarrinho(Base):
     quantidade = Column(Integer, nullable=False)
 
     produto = relationship("Produto")
+    aluguel = relationship("Aluguel", back_populates="itens_carrinho")
+
+class Entrega(Base):
+    __tablename__ = 'entrega'
+
+    id = Column(Integer, primary_key=True)
+    aluguel_id = Column(Integer, ForeignKey('aluguel.id'))
+    tipo_entrega = Column(String, nullable=False)
+    cep = Column(String, nullable=True)
+    endereco = Column(String, nullable=True)
+    bairro = Column(String, nullable=True)
+    cidade = Column(String, nullable=True)
+    numero = Column(String, nullable=True)
+    complemento = Column(String, nullable=True)
+    nome_destinatario = Column(String, nullable=True)
+
+    aluguel = relationship("Aluguel", back_populates="entrega")
+
+    def __repr__(self):
+        return f"<Entrega(aluguel_id={self.aluguel_id}, tipo_entrega='{self.tipo_entrega}')>"
+

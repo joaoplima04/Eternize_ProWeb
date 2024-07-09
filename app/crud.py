@@ -66,3 +66,13 @@ def create_aluguel(db: Session, aluguel: schemas.AluguelCreate):
     db.commit()
     db.refresh(db_aluguel)
     return db_aluguel
+
+def create_entrega(db: Session, entrega: schemas.EntregaCreate):
+    db_entrega = models.Entrega(**entrega.dict())
+    db.add(db_entrega)
+    db.commit()
+    db.refresh(db_entrega)
+    return db_entrega
+
+def get_entrega(db: Session, entrega_id: int):
+    return db.query(models.Entrega).filter(models.Entrega.id == entrega_id).first()

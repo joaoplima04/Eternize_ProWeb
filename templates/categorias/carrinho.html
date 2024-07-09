@@ -35,10 +35,128 @@
         <h4 class="text-right">Total: R$ <span id="cart-total">{{ cart_total }}</span></h4>
       </div>
     </div>
-
+    <div class="container mt-5">
+      <div class="card">
+          <div class="card-header">
+              INFORMAÇÕES DE LOCAÇÃO
+          </div>
+          <div class="card-body">
+              <form id="locacao-form">
+                  <div class="form-group">
+                      <label for="inicio-locacao">Início da Locação</label>
+                      <input type="date" class="form-control" id="inicio-locacao" placeholder="DD/MM/AAAA">
+                  </div>
+                  <div class="form-group">
+                      <label for="hora-inicial">Hora Inicial</label>
+                      <input type="time" class="form-control" id="hora-inicial">
+                  </div>
+                  <div class="form-group">
+                      <label for="termino-locacao">Término da Locação</label>
+                      <input type="date" class="form-control" id="termino-locacao" placeholder="DD/MM/AAAA">
+                  </div>
+                  <div class="form-group">
+                      <label for="hora-final">Hora Final</label>
+                      <input type="time" class="form-control" id="hora-final">
+                  </div>
+                  <div class="card mt-4">
+                      <div class="card-header">
+                          INFORMAÇÕES DE ENTREGA
+                      </div>
+                      <div class="card-body">
+                          <div class="form-group">
+                              <label for="tipo-entrega">Tipos de Entrega</label><br>
+                              <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="tipo-entrega" id="retirar-loja" value="Retirar na Loja" onchange="toggleEntregaFields()">
+                                  <label class="form-check-label" for="retirar-loja">Retirar na Loja</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="tipo-entrega" id="frete" value="Frete" onchange="toggleEntregaFields()">
+                                  <label class="form-check-label" for="frete">Frete</label>
+                              </div>
+                          </div>
+                          <div id="entrega-fields">
+                              <div class="form-group">
+                                  <label for="cep">CEP</label>
+                                  <input type="text" class="form-control" id="cep" placeholder="CEP">
+                              </div>
+                              <div class="form-group">
+                                  <label for="endereco">Endereço</label>
+                                  <input type="text" class="form-control" id="endereco" placeholder="Endereço">
+                              </div>
+                              <div class="form-group">
+                                  <label for="bairro">Bairro</label>
+                                  <input type="text" class="form-control" id="bairro" placeholder="Bairro">
+                              </div>
+                              <div class="form-group">
+                                  <label for="cidade">Cidade</label>
+                                  <input type="text" class="form-control" id="cidade" placeholder="Cidade">
+                              </div>
+                              <div class="form-group">
+                                  <label for="numero">Número</label>
+                                  <input type="text" class="form-control" id="numero" placeholder="Número">
+                              </div>
+                              <div class="form-group">
+                                  <label for="complemento">Complemento</label>
+                                  <input type="text" class="form-control" id="complemento" placeholder="Complemento">
+                              </div>
+                              <div class="form-group">
+                                  <label for="nome-destinatario">Nome do Destinatário</label>
+                                  <input type="text" class="form-control" id="nome-destinatario" placeholder="Nome do Destinatário">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group mt-4">
+                      <label for="observacoes">OBSERVAÇÕES</label>
+                      <textarea class="form-control" id="observacoes" rows="3"></textarea>
+                  </div>
+          </div>
+      </div>
+  </div>
     <div class="row mt-3">
       <div class="col-md-12 text-center">
-        <a href="#" class="btn btn-primary btn-lg">Finalizar compra</a>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#confirmModal" onclick="preencherModal()">Solicitar orçamento</button>
+      </div>
+    </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalLabel">Confirmar Informações</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h6>Produtos no Carrinho</h6>
+            <div id="confirm-cart-items"></div>
+            <h6>Informações de Locação</h6>
+            <p><strong>Início da Locação:</strong> <span id="confirm-inicio-locacao"></span></p>
+            <p><strong>Hora Inicial:</strong> <span id="confirm-hora-inicial"></span></p>
+            <p><strong>Término da Locação:</strong> <span id="confirm-termino-locacao"></span></p>
+            <p><strong>Hora Final:</strong> <span id="confirm-hora-final"></span></p>
+            <h6>Informações de Entrega</h6>
+            <p><strong>Tipo de Entrega:</strong> <span id="confirm-tipo-entrega"></span></p>
+            <div id="confirm-entrega-fields">
+              <p><strong>CEP:</strong> <span id="confirm-cep"></span></p>
+              <p><strong>Endereço:</strong> <span id="confirm-endereco"></span></p>
+              <p><strong>Bairro:</strong> <span id="confirm-bairro"></span></p>
+              <p><strong>Cidade:</strong> <span id="confirm-cidade"></span></p>
+              <p><strong>Número:</strong> <span id="confirm-numero"></span></p>
+              <p><strong>Complemento:</strong> <span id="confirm-complemento"></span></p>
+              <p><strong>Nome do Destinatário:</strong> <span id="confirm-nome-destinatario"></span></p>
+            </div>
+            <h6>Observações</h6>
+            <p id="confirm-observacoes"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="confirmarOrcamento()">Confirmar</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -48,6 +166,7 @@
     </div>
   {% endif %}
 </div>
+
 <script>
   function updateQuantity(produtoId) {
     const quantityInput = document.getElementById(`quantity-${produtoId}`);
@@ -62,7 +181,6 @@
     .then(response => {
         if (response.ok) {
             console.log("Quantity updated successfully");
-            // Optionally, you can show a success message or reload the page
             updateCartTotal();
         } else {
             console.error("Failed to update quantity");
@@ -83,7 +201,6 @@
     .then(response => {
       if (response.ok) {
           console.log("Product removed successfully");
-          // Optionally, you can show a success message or reload the page
           updateCartItems();
       } else {
           console.error("Failed to remove quantity");
@@ -94,12 +211,64 @@
     });
   }
 
+  function toggleEntregaFields() {
+    const entregaFields = document.getElementById('entrega-fields');
+    const retirarNaLoja = document.getElementById('retirar-loja').checked;
+
+    if (retirarNaLoja) {
+        entregaFields.classList.add('d-none');
+    } else {
+        entregaFields.classList.remove('d-none');
+    }
+  }
+
+  function preencherModal() {
+    document.getElementById('confirm-inicio-locacao').innerText = document.getElementById('inicio-locacao').value;
+    document.getElementById('confirm-hora-inicial').innerText = document.getElementById('hora-inicial').value;
+    document.getElementById('confirm-termino-locacao').innerText = document.getElementById('termino-locacao').value;
+    document.getElementById('confirm-hora-final').innerText = document.getElementById('hora-final').value;
+    const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked').value;
+    document.getElementById('confirm-tipo-entrega').innerText = tipoEntrega;
+
+    if (tipoEntrega === 'Frete') {
+        document.getElementById('confirm-cep').innerText = document.getElementById('cep').value;
+        document.getElementById('confirm-endereco').innerText = document.getElementById('endereco').value;
+        document.getElementById('confirm-bairro').innerText = document.getElementById('bairro').value;
+        document.getElementById('confirm-cidade').innerText = document.getElementById('cidade').value;
+        document.getElementById('confirm-numero').innerText = document.getElementById('numero').value;
+        document.getElementById('confirm-complemento').innerText = document.getElementById('complemento').value;
+        document.getElementById('confirm-nome-destinatario').innerText = document.getElementById('nome-destinatario').value;
+        document.getElementById('confirm-entrega-fields').classList.remove('d-none');
+    } else {
+        document.getElementById('confirm-entrega-fields').classList.add('d-none');
+    }
+
+    document.getElementById('confirm-observacoes').innerText = document.getElementById('observacoes').value;
+
+    const cartItemsElement = document.getElementById('confirm-cart-items');
+    cartItemsElement.innerHTML = '';
+    {% for item in cart_items %}
+    cartItemsElement.innerHTML += `
+      <p><strong>Produto:</strong> {{ item.produto.nome }} - <strong>Quantidade:</strong> {{ item.quantidade }} - <strong>Preço:</strong> R$ {{ item.produto.preco }}</p>
+    `;
+    {% endfor %}
+  }
+
+  function confirmarOrcamento() {
+    const form = document.getElementById('locacao-form');
+    form.submit();
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    toggleEntregaFields();
+  });
+
   function updateCartTotal() {
     fetch(`/cart/cart_total/`)
     .then(response => response.json())
     .then(data => {
         const cartTotalElement = document.getElementById('cart-total');
-        cartTotalElement.textContent = data.cart_total.toFixed(2); // Exibe o total com duas casas decimais
+        cartTotalElement.textContent = data.cart_total.toFixed(2);
     })
     .catch(error => {
         console.error("Error fetching cart total:", error);
@@ -108,9 +277,15 @@
 
   function updateCartItems() {
     fetch("/cart/")
-}
+    .then(response => response.json())
+    .then(data => {
+        // Update cart items
+    })
+    .catch(error => {
+        console.error("Error fetching cart items:", error);
+    });
+  }
 
-  // Chama updateCartTotal inicialmente para carregar o total do carrinho ao carregar a página
   updateCartItems();
   updateCartTotal();
 </script>

@@ -68,3 +68,23 @@ class Aluguel(AluguelBase):
 
     class Config:
         orm_mode = True
+
+class EntregaBase(BaseModel):
+    tipo_entrega: str
+    cep: Optional[str] = None
+    endereco: Optional[str] = None
+    bairro: Optional[str] = None
+    cidade: Optional[str] = None
+    numero: Optional[str] = None
+    complemento: Optional[str] = None
+    nome_destinatario: Optional[str] = None
+
+class EntregaCreate(EntregaBase):
+    aluguel_id: int  # A chave estrangeira que relaciona com o aluguel
+
+class Entrega(EntregaBase):
+    id: int
+    aluguel_id: int
+
+    class Config:
+        orm_mode = True

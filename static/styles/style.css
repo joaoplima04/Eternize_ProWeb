@@ -171,3 +171,7 @@ footer {
   position: relative;
   top: 1000px;
 }
+
+.hidden {
+  display: none;
+}
