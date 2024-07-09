@@ -173,5 +173,3 @@ Contém funções para criação e verificação de tokens JWT, além de funçõ
 ## Contribuição
 ● **Contribuidor 1**: João Lucas Pereira Lima
 
-● **Contribuidor 2**: Yuri Rabello
-
