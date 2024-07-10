@@ -40,7 +40,6 @@ def create_cliente(db: Session, cliente: schemas.ClienteCreate):
     hashed_password = get_password_hash(cliente.password)
     db_cliente = models.Cliente(
         cpf=cliente.cpf,
-        username=cliente.username,
         nome=cliente.nome,
         email=cliente.email,
         telefone=cliente.telefone,
@@ -76,3 +75,8 @@ def create_entrega(db: Session, entrega: schemas.EntregaCreate):
 
 def get_entrega(db: Session, entrega_id: int):
     return db.query(models.Entrega).filter(models.Entrega.id == entrega_id).first()
+
+def get_cart_total(db: Session, aluguel_id: int) -> float:
+    cart_items = db.query(models.ItemCarrinho).filter_by(aluguel_id=aluguel_id).all()
+    cart_total = sum(item.produto.preco * item.quantidade for item in cart_items)
+    return cart_total

@@ -1,38 +1,38 @@
 id,nome,categoria,preco,quantidade_estoque,imagem,cor,estilo,publicado
-39,Guardanapo De Linho Misto Ponto Ajour Cru,GUARDANAPO,"3,00",1,imagens/guardanapo_cru.png,Cinza,ELEGANTE,1
-38,Guardanapo De Linho Misto Ponto Ajour Verde Menta,GUARDANAPO,"3,00",1,imagens/guardanapo_verde.png,Verde,ELEGANTE,1
-37,Guardanapo Ponto Ajour Azul Serenity,GUARDANAPO,"4,00",1,imagens/guardanapo_azul.png,Azul,ELEGANTE,1
-36,Guardanapo Linho Misto Preto,GUARDANAPO,"3,00",1,imagens/guardanapo_preto.png,Preto,ELEGANTE,1
-35,Guardanapo De Linho Misto Ponto Ajour Amarelo,GUARDANAPO,"3,00",1,imagens/guardanapo_amarelo.png,Amarelo,ELEGANTE,1
-34,Guardanapo De Linho Misto Ponto Ajour Rosa Seco,GUARDANAPO,"3,00",1,imagens/guardanapo_rosa.png,Rosa,ELEGANTE,1
-33,Guardanapo Linho Misto Azul Marinho,GUARDANAPO,"3,00",1,imagens/guardanapo_azulmarinho.png,Azul,ELEGANTE,1
-32,Guardanapo Linho Misto Amarelo Girassol,GUARDANAPO,"3,00",1,imagens/guardanapo_amarelogirassol.png,Amarelo,ELEGANTE,1
-31,Guardanapo Linho Misto Rosa Pink,GUARDANAPO,"4,00",1,imagens/guardanapo_rosapink.png,Rosa,ELEGANTE,1
-30,Guardanapo Linho Misto Ponto Ajour Terra,GUARDANAPO,"3,00",1,imagens/guardanapo_terra.png,Terra,ELEGANTE,1
-29,Guardanapo Linho Misto Vinho,GUARDANAPO,"3,50",1,imagens/guardanapo_vinho.png,Vinho,ELEGANTE,1
-28,Guardanapo com Ponto Ajour Off White,GUARDANAPO,"4,00",1,imagens/guardanapo_offwhite.png,Off White,ELEGANTE,1
-27,Guardanapo com Ponto Ajour Branco,GUARDANAPO,"4,00",1,imagens/guardanapo_branco.png,Branco,ELEGANTE,1
-26,Guardanapo em Linho Misto Verde Musgo,GUARDANAPO,"4,00",1,imagens/guardanapo_verdemusgo.png,Verde,ELEGANTE,1
-25,Guardanapo em Linho Misto Laranja,GUARDANAPO,"5,00",1,imagens/guardanapo_laranja.png,Laranja,ELEGANTE,1
-24,Sousplat Fendi,SOUSPLAT,"3,00",1,imagens/souplat_fendi.png,Prateado,ELEGANTE,1
-23,Sousplat Galles Vermelho,SOUSPLAT,"4,00",1,imagens/souplat_gallesvermelho.png,Vermelho,ELEGANTE,1
-22,Sousplat Perolado Borda Dourada,SOUSPLAT,"3,50",1,imagens/souplat_perolado.png,Dourado,ELEGANTE,1
-21,Sousplat Elizabeth Borda Dourada,SOUSPLAT,"3,50",1,imagens/souplat_elizabeth.png,Dourado,ELEGANTE,1
-20,Sousplat de Plástico Azul Borda Dourada,SOUSPLAT,"3,00",1,imagens/souplat_azul.png,Azul,ELEGANTE,1
-19,Sousplatt Galles Verde,SOUSPLAT,"3,00",1,imagens/souplat_galles.png,Verde,ELEGANTE,1
-18,Sousplat de Vidro Borda Prateada,SOUSPLAT,"9,50",1,imagens/souplat_vidroprateado.png,Prateado,ELEGANTE,1
-17,Sousplat Dourado Plástico - Wolff,SOUSPLAT,"3,00",1,imagens/souplat_plasticodourado.png,Dourado,ELEGANTE,1
-16,Sousplat de Cristal Borda Dourada WOLFF,SOUSPLAT,"5,00",0,imagens/souplat_bordadourada.png,Dourado,ELEGANTE,1
-15,Sousplat Cromus Rosa,SOUSPLAT,"5,00",0,imagens/souplat_cromus.png,Rosa,ELEGANTE,1
-14,Sousplat Cristal Pearl - Wolff,SOUSPLAT,"5,00",0,imagens/souplat_cristal.png,Transparente,ELEGANTE,1
-12,Sousplat Basic Rosa,SOUSPLAT,"5,00",0,imagens/souplat_rosa.png,Rosa,ELEGANTE,1
-11,PRATO_RASO Fruits,PRATO_RASO,"5,00",0,imagens/prato_fruits.png,Bege,TROPICAL,1
-10,PRATO_RASO Chinese Blue,PRATO_RASO,"5,00",0,imagens/prato_chinese_blue.png,Azul,ELEGANTE,1
-9,PRATO_RASO Bothanica,PRATO_RASO,"5,00",0,imagens/prato_bothanica.png,Roxo/Verde,FLORIDO,1
-8,PRATO_RASO rosa Fractal - Porcelana,PRATO_RASO,"5,00",0,imagens/prato_rosa_fractal.png,Rosa,ELEGANTE,1
-7,PRATO_RASO Sorrento,PRATO_RASO,"5,00",0,imagens/prato_sorrento.png,Azul,TROPICAL,1
-6,PRATO_RASO Monte Carlo Findi Filete Ouro,PRATO_RASO,"5,00",0,imagens/Prato_branco_filete_dourado_PZ43Ve1.png,Branco/Dourado,ELEGANTE,1
-5,PRATO_RASO Atlântica Acetinado,PRATO_RASO,"5,50",0,imagens/Prato_atlantico.png,Verde,TROPICAL,1
-4,PRATO_RASO Bambú,PRATO_RASO,"4,00",0,imagens/prato_bambu.png,Verde,TROPICAL,1
-3,PRATO_RASO Branco Filete Dourado,PRATO_RASO,"5,00",0,imagens/Prato_branco_filete_dourado.png,Branco/Dourado,ELEGANTE,1
-2,PRATO_RASO Flowers Neomint,PRATO_RASO,"5,00",0,imagens/prato_flowers_neo_mint.png,Verde,FLORIDO,1
+39,Guardanapo De Linho Misto Ponto Ajour Cru,GUARDANAPO,"3.00",1,imagens/guardanapo_cru.png,Cinza,ELEGANTE,1
+38,Guardanapo De Linho Misto Ponto Ajour Verde Menta,GUARDANAPO,"3.00",1,imagens/guardanapo_verde.png,Verde,ELEGANTE,1
+37,Guardanapo Ponto Ajour Azul Serenity,GUARDANAPO,"4.00",1,imagens/guardanapo_azul.png,Azul,ELEGANTE,1
+36,Guardanapo Linho Misto Preto,GUARDANAPO,"3.00",1,imagens/guardanapo_preto.png,Preto,ELEGANTE,1
+35,Guardanapo De Linho Misto Ponto Ajour Amarelo,GUARDANAPO,"3.00",1,imagens/guardanapo_amarelo.png,Amarelo,ELEGANTE,1
+34,Guardanapo De Linho Misto Ponto Ajour Rosa Seco,GUARDANAPO,"3.00",1,imagens/guardanapo_rosa.png,Rosa,ELEGANTE,1
+33,Guardanapo Linho Misto Azul Marinho,GUARDANAPO,"3.00",1,imagens/guardanapo_azulmarinho.png,Azul,ELEGANTE,1
+32,Guardanapo Linho Misto Amarelo Girassol,GUARDANAPO,"3.00",1,imagens/guardanapo_amarelogirassol.png,Amarelo,ELEGANTE,1
+31,Guardanapo Linho Misto Rosa Pink,GUARDANAPO,"4.00",1,imagens/guardanapo_rosapink.png,Rosa,ELEGANTE,1
+30,Guardanapo Linho Misto Ponto Ajour Terra,GUARDANAPO,"3.00",1,imagens/guardanapo_terra.png,Terra,ELEGANTE,1
+29,Guardanapo Linho Misto Vinho,GUARDANAPO,"3.50",1,imagens/guardanapo_vinho.png,Vinho,ELEGANTE,1
+28,Guardanapo com Ponto Ajour Off White,GUARDANAPO,"4.00",1,imagens/guardanapo_offwhite.png,Off White,ELEGANTE,1
+27,Guardanapo com Ponto Ajour Branco,GUARDANAPO,"4.00",1,imagens/guardanapo_branco.png,Branco,ELEGANTE,1
+26,Guardanapo em Linho Misto Verde Musgo,GUARDANAPO,"4.00",1,imagens/guardanapo_verdemusgo.png,Verde,ELEGANTE,1
+25,Guardanapo em Linho Misto Laranja,GUARDANAPO,"5.00",1,imagens/guardanapo_laranja.png,Laranja,ELEGANTE,1
+24,Sousplat Fendi,SOUSPLAT,"3.00",1,imagens/souplat_fendi.png,Prateado,ELEGANTE,1
+23,Sousplat Galles Vermelho,SOUSPLAT,"4.00",1,imagens/souplat_gallesvermelho.png,Vermelho,ELEGANTE,1
+22,Sousplat Perolado Borda Dourada,SOUSPLAT,"3.50",1,imagens/souplat_perolado.png,Dourado,ELEGANTE,1
+21,Sousplat Elizabeth Borda Dourada,SOUSPLAT,"3.50",1,imagens/souplat_elizabeth.png,Dourado,ELEGANTE,1
+20,Sousplat de Plástico Azul Borda Dourada,SOUSPLAT,"3.00",1,imagens/souplat_azul.png,Azul,ELEGANTE,1
+19,Sousplatt Galles Verde,SOUSPLAT,"3.00",1,imagens/souplat_galles.png,Verde,ELEGANTE,1
+18,Sousplat de Vidro Borda Prateada,SOUSPLAT,"9.50",1,imagens/souplat_vidroprateado.png,Prateado,ELEGANTE,1
+17,Sousplat Dourado Plástico - Wolff,SOUSPLAT,"3.00",1,imagens/souplat_plasticodourado.png,Dourado,ELEGANTE,1
+16,Sousplat de Cristal Borda Dourada WOLFF,SOUSPLAT,"5.00",0,imagens/souplat_bordadourada.png,Dourado,ELEGANTE,1
+15,Sousplat Cromus Rosa,SOUSPLAT,"5.00",0,imagens/souplat_cromus.png,Rosa,ELEGANTE,1
+14,Sousplat Cristal Pearl - Wolff,SOUSPLAT,"5.00",0,imagens/souplat_cristal.png,Transparente,ELEGANTE,1
+12,Sousplat Basic Rosa,SOUSPLAT,"5.00",0,imagens/souplat_rosa.png,Rosa,ELEGANTE,1
+11,PRATO_RASO Fruits,PRATO_RASO,"5.00",0,imagens/prato_fruits.png,Bege,TROPICAL,1
+10,PRATO_RASO Chinese Blue,PRATO_RASO,"5.00",0,imagens/prato_chinese_blue.png,Azul,ELEGANTE,1
+9,PRATO_RASO Bothanica,PRATO_RASO,"5.00",0,imagens/prato_bothanica.png,Roxo/Verde,FLORIDO,1
+8,PRATO_RASO rosa Fractal - Porcelana,PRATO_RASO,"5.00",0,imagens/prato_rosa_fractal.png,Rosa,ELEGANTE,1
+7,PRATO_RASO Sorrento,PRATO_RASO,"5.00",0,imagens/prato_sorrento.png,Azul,TROPICAL,1
+6,PRATO_RASO Monte Carlo Findi Filete Ouro,PRATO_RASO,"5.00",0,imagens/Prato_branco_filete_dourado_PZ43Ve1.png,Branco/Dourado,ELEGANTE,1
+5,PRATO_RASO Atlântica Acetinado,PRATO_RASO,"5.50",0,imagens/Prato_atlantico.png,Verde,TROPICAL,1
+4,PRATO_RASO Bambú,PRATO_RASO,"4.00",0,imagens/prato_bambu.png,Verde,TROPICAL,1
+3,PRATO_RASO Branco Filete Dourado,PRATO_RASO,"5.00",0,imagens/Prato_branco_filete_dourado.png,Branco/Dourado,ELEGANTE,1
+2,PRATO_RASO Flowers Neomint,PRATO_RASO,"5.00",0,imagens/prato_flowers_neo_mint.png,Verde,FLORIDO,1

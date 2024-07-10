@@ -29,7 +29,6 @@ def get_register(request: Request, db: Session = Depends(get_db)):
 
 def get_cliente_form(
     cpf: str = Form(...),
-    username: str = Form(...),
     nome: str = Form(...),
     email: str = Form(...),
     telefone: str = Form(...),
@@ -38,7 +37,6 @@ def get_cliente_form(
 ) -> schemas.ClienteCreate:
     return schemas.ClienteCreate(
         cpf=cpf,
-        username=username,
         nome=nome,
         email=email,
         telefone=telefone,

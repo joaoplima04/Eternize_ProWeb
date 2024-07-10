@@ -41,7 +41,6 @@ class Produto(ProdutoBase):
 
 class ClienteBase(BaseModel):
     cpf: str
-    username: str
     nome: str
     email: str
     telefone: str
@@ -57,8 +56,11 @@ class Cliente(ClienteBase):
 class AluguelBase(BaseModel):
     cliente_cpf: str
     data_aluguel: date
+    hora_inicial: str
     data_devolucao: date
+    hora_final: str
     preco_total: float
+    tipo_entrega: str
 
 class AluguelCreate(AluguelBase):
     pass
@@ -70,7 +72,6 @@ class Aluguel(AluguelBase):
         orm_mode = True
 
 class EntregaBase(BaseModel):
-    tipo_entrega: str
     cep: Optional[str] = None
     endereco: Optional[str] = None
     bairro: Optional[str] = None
@@ -80,7 +81,7 @@ class EntregaBase(BaseModel):
     nome_destinatario: Optional[str] = None
 
 class EntregaCreate(EntregaBase):
-    aluguel_id: int  # A chave estrangeira que relaciona com o aluguel
+    aluguel_id: int 
 
 class Entrega(EntregaBase):
     id: int

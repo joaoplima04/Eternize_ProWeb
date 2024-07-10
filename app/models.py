@@ -42,7 +42,6 @@ class Cliente(Base):
     __tablename__ = 'cliente'
 
     cpf = Column(String(14), primary_key=True)
-    username = Column(String(150), unique=True)
     nome = Column(String(100))
     email = Column(String(255), unique=True)
     telefone = Column(String(20))
@@ -63,6 +62,7 @@ class Aluguel(Base):
     data_devolucao = Column(Date)
     hora_final = Column(Time)
     preco_total = Column(Float)
+    tipo_entrega = Column(String, nullable=False)
 
     entrega = relationship("Entrega", uselist=False, back_populates="aluguel")
     itens_carrinho = relationship("ItemCarrinho", back_populates="aluguel")
@@ -76,6 +76,7 @@ class ItemCarrinho(Base):
     id = Column(Integer, primary_key=True, index=True)
     produto_id = Column(Integer, ForeignKey('produto.id'))
     quantidade = Column(Integer, nullable=False)
+    aluguel_id = Column(Integer, ForeignKey('aluguel.id'))
 
     produto = relationship("Produto")
     aluguel = relationship("Aluguel", back_populates="itens_carrinho")
@@ -85,7 +86,6 @@ class Entrega(Base):
 
     id = Column(Integer, primary_key=True)
     aluguel_id = Column(Integer, ForeignKey('aluguel.id'))
-    tipo_entrega = Column(String, nullable=False)
     cep = Column(String, nullable=True)
     endereco = Column(String, nullable=True)
     bairro = Column(String, nullable=True)
