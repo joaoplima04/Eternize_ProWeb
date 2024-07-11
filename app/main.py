@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from app.routers import users, cart, products, categories
+from app.routers import users, cart, products, categories, loans
 from pathlib import Path
 from .config import templates
 
@@ -23,3 +23,4 @@ app.include_router(products.router, prefix="/produtos", tags=["products"])
 app.include_router(categories.router, prefix="/categories", tags=["categories"])
 app.include_router(users.router, prefix="/users", tags=["users"])
 app.include_router(cart.router, prefix="/cart", tags=["cart"])
+app.include_router(loans.router, prefix="", tags=["loans"])

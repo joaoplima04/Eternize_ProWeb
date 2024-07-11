@@ -46,7 +46,7 @@ def get_cliente_form(
 
 @router.post("/cadastro_user/", response_model=schemas.Cliente)
 def create_cliente(cliente: schemas.ClienteCreate = Depends(get_cliente_form), db: Session = Depends(get_db)):
-    db_cliente = crud.get_cliente(db, cliente_email=cliente.email)
+    db_cliente = crud.get_cliente(db, cliente.cpf)
     if db_cliente:
         raise HTTPException(status_code=400, detail="CPF já registrado")
     new_cliente = crud.create_cliente(db=db, cliente=cliente)
@@ -54,8 +54,9 @@ def create_cliente(cliente: schemas.ClienteCreate = Depends(get_cliente_form), d
     access_token = auth.create_access_token(data={"sub": new_cliente.email}, expires_delta=timedelta(minutes=60))
     # Redireciona para a página principal com uma mensagem de boas-vindas
     response = RedirectResponse(url="/", status_code=303)
-    response.set_cookie(key="access_token", value=access_token, httponly=True, max_age=3600)
-    response.set_cookie(key="welcome_message", value=f"Bem vindo {new_cliente.nome}!", max_age=3600)
+    response.set_cookie(key="cpf", value=new_cliente.cpf, httponly=True)
+    response.set_cookie(key="access_token", value=access_token, httponly=True)
+    response.set_cookie(key="welcome_message", value=f"Bem vindo {new_cliente.nome}!")
     return response
 
 @router.get("/login", response_class=HTMLResponse)
@@ -86,7 +87,7 @@ def get_login(request: Request, db: Session = Depends(get_db)):
 
 @router.post("/login_user/")
 def login(email: str = Form(...), password: str = Form(...), next: str = Form(...), db: Session = Depends(get_db)):
-    user = crud.get_cliente(db, cliente_email=email)
+    user = crud.get_cliente_by_email(db, cliente_email=email)
     if not user:
         response = RedirectResponse(url=f"/users/login?next={next}", status_code=303)
         response.set_cookie(key="error", value=f"Email incorreto", max_age=3600)
@@ -98,6 +99,7 @@ def login(email: str = Form(...), password: str = Form(...), next: str = Form(..
 
     access_token = auth.create_access_token(data={"sub": user.email}, expires_delta=timedelta(minutes=60))
     response = RedirectResponse(url=next, status_code=303)
+    response.set_cookie(key="cpf", value=user.cpf, httponly=True, max_age=3600)
     response.set_cookie(key="welcome_message", value=f"Bem vindo {user.nome}!", max_age=3600)
     response.set_cookie(key="access_token", value=access_token, httponly=True, max_age=3600)
     return response
@@ -107,4 +109,5 @@ def logout():
     response = RedirectResponse(url="/users/login")
     response.delete_cookie(key="access_token")
     response.delete_cookie(key="welcome_message")
+    response.delete_cookie(key="cpf")
     return response

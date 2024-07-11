@@ -60,7 +60,7 @@ def remove_from_cart_endpoint(produto_id: int, db: Session = Depends(get_db)):
     return Response(status_code=200)
 
 @router.get("/cart_total/")
-def get_cart_total(db: Session = Depends(get_db)):
+def get_cart_total_ep(db: Session = Depends(get_db)):
     cart_items = db.query(ItemCarrinho).filter_by().all()
     cart_total = sum(item.produto.preco * item.quantidade for item in cart_items)
     return {"cart_total": cart_total}

@@ -41,78 +41,78 @@
               INFORMAÇÕES DE LOCAÇÃO
           </div>
           <div class="card-body">
-              <form id="locacao-form">
-                  <div class="form-group">
-                      <label for="inicio-locacao">Início da Locação</label>
-                      <input type="date" class="form-control" id="inicio-locacao" placeholder="DD/MM/AAAA">
-                  </div>
-                  <div class="form-group">
-                      <label for="hora-inicial">Hora Inicial</label>
-                      <input type="time" class="form-control" id="hora-inicial">
-                  </div>
-                  <div class="form-group">
-                      <label for="termino-locacao">Término da Locação</label>
-                      <input type="date" class="form-control" id="termino-locacao" placeholder="DD/MM/AAAA">
-                  </div>
-                  <div class="form-group">
-                      <label for="hora-final">Hora Final</label>
-                      <input type="time" class="form-control" id="hora-final">
-                  </div>
-                  <div class="card mt-4">
-                      <div class="card-header">
-                          INFORMAÇÕES DE ENTREGA
-                      </div>
-                      <div class="card-body">
-                          <div class="form-group">
-                              <label for="tipo-entrega">Tipos de Entrega</label><br>
-                              <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="tipo-entrega" id="retirar-loja" value="Retirar na Loja" onchange="toggleEntregaFields()">
-                                  <label class="form-check-label" for="retirar-loja">Retirar na Loja</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="tipo-entrega" id="frete" value="Frete" onchange="toggleEntregaFields()">
-                                  <label class="form-check-label" for="frete">Frete</label>
-                              </div>
-                          </div>
-                          <div id="entrega-fields">
-                              <div class="form-group">
-                                  <label for="cep">CEP</label>
-                                  <input type="text" class="form-control" id="cep" placeholder="CEP">
-                              </div>
-                              <div class="form-group">
-                                  <label for="endereco">Endereço</label>
-                                  <input type="text" class="form-control" id="endereco" placeholder="Endereço">
-                              </div>
-                              <div class="form-group">
-                                  <label for="bairro">Bairro</label>
-                                  <input type="text" class="form-control" id="bairro" placeholder="Bairro">
-                              </div>
-                              <div class="form-group">
-                                  <label for="cidade">Cidade</label>
-                                  <input type="text" class="form-control" id="cidade" placeholder="Cidade">
-                              </div>
-                              <div class="form-group">
-                                  <label for="numero">Número</label>
-                                  <input type="text" class="form-control" id="numero" placeholder="Número">
-                              </div>
-                              <div class="form-group">
-                                  <label for="complemento">Complemento</label>
-                                  <input type="text" class="form-control" id="complemento" placeholder="Complemento">
-                              </div>
-                              <div class="form-group">
-                                  <label for="nome-destinatario">Nome do Destinatário</label>
-                                  <input type="text" class="form-control" id="nome-destinatario" placeholder="Nome do Destinatário">
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group mt-4">
-                      <label for="observacoes">OBSERVAÇÕES</label>
-                      <textarea class="form-control" id="observacoes" rows="3"></textarea>
-                  </div>
-          </div>
-      </div>
-  </div>
+            <form id="locacao-form" action="/locacao/" method="post">
+                <div class="form-group">
+                    <label for="data-aluguel">Início da Locação</label>
+                    <input type="date" class="form-control" id="inicio-locacao" name="data_aluguel" placeholder="DD/MM/AAAA">
+                </div>
+                <div class="form-group">
+                    <label for="hora-inicial">Hora Inicial</label>
+                    <input type="time" class="form-control" id="hora-inicial" name="hora_inicial">
+                </div>
+                <div class="form-group">
+                    <label for="data-devolucao">Término da Locação</label>
+                    <input type="date" class="form-control" id="termino-locacao" name="data_devolucao" placeholder="DD/MM/AAAA">
+                </div>
+                <div class="form-group">
+                    <label for="hora-final">Hora Final</label>
+                    <input type="time" class="form-control" id="hora-final" name="hora_final">
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        INFORMAÇÕES DE ENTREGA
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="tipo-entrega">Tipos de Entrega</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tipo_entrega" id="retirar-loja" value="Retirar na Loja" onchange="toggleEntregaFields()">
+                                <label class="form-check-label" for="retirar-loja">Retirar na Loja</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tipo_entrega" id="frete" value="Frete" onchange="toggleEntregaFields()">
+                                <label class="form-check-label" for="frete">Frete</label>
+                            </div>
+                        </div>
+                        <div id="entrega-fields">
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP">
+                            </div>
+                            <div class="form-group">
+                                <label for="endereco">Endereço</label>
+                                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
+                            </div>
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro">
+                            </div>
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade">
+                            </div>
+                            <div class="form-group">
+                                <label for="numero">Número</label>
+                                <input type="text" class="form-control" id="numero" name="numero" placeholder="Número">
+                            </div>
+                            <div class="form-group">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento">
+                            </div>
+                            <div class="form-group">
+                                <label for="nome-destinatario">Nome do Destinatário</label>
+                                <input type="text" class="form-control" id="nome-destinatario" name="nome_destinatario" placeholder="Nome do Destinatário">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <label for="observacoes">OBSERVAÇÕES</label>
+                    <textarea class="form-control" id="observacoes" name="observacoes" rows="3"></textarea>
+                </div>
+        </div>
+    </div>
+</div>
     <div class="row mt-3">
       <div class="col-md-12 text-center">
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#confirmModal" onclick="preencherModal()">Solicitar orçamento</button>
@@ -132,8 +132,10 @@
           </div>
           <div class="modal-body">
             <h6>Produtos no Carrinho</h6>
-            <div id="confirm-cart-items"></div>
+            <div id="confirm-cart-items"></div><br>
+            <p><strong>Preço total:</strong> <span id="cart-total">{{ cart_total }}</span></p>
             <h6>Informações de Locação</h6>
+            <br>
             <p><strong>Início da Locação:</strong> <span id="confirm-inicio-locacao"></span></p>
             <p><strong>Hora Inicial:</strong> <span id="confirm-hora-inicial"></span></p>
             <p><strong>Término da Locação:</strong> <span id="confirm-termino-locacao"></span></p>
@@ -223,13 +225,17 @@
   }
 
   function preencherModal() {
+    // Capturar valores do formulário de locação
     document.getElementById('confirm-inicio-locacao').innerText = document.getElementById('inicio-locacao').value;
     document.getElementById('confirm-hora-inicial').innerText = document.getElementById('hora-inicial').value;
     document.getElementById('confirm-termino-locacao').innerText = document.getElementById('termino-locacao').value;
     document.getElementById('confirm-hora-final').innerText = document.getElementById('hora-final').value;
-    const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked').value;
+    
+    // Capturar tipo de entrega
+    const tipoEntrega = document.querySelector('input[name="tipo_entrega"]:checked').value;
     document.getElementById('confirm-tipo-entrega').innerText = tipoEntrega;
 
+    // Se o tipo de entrega for "Frete", capturar e preencher os detalhes de entrega
     if (tipoEntrega === 'Frete') {
         document.getElementById('confirm-cep').innerText = document.getElementById('cep').value;
         document.getElementById('confirm-endereco').innerText = document.getElementById('endereco').value;
@@ -243,16 +249,18 @@
         document.getElementById('confirm-entrega-fields').classList.add('d-none');
     }
 
+    // Capturar observações
     document.getElementById('confirm-observacoes').innerText = document.getElementById('observacoes').value;
 
+    // Capturar e preencher os itens do carrinho
     const cartItemsElement = document.getElementById('confirm-cart-items');
-    cartItemsElement.innerHTML = '';
+    cartItemsElement.innerHTML = ''; // Limpar conteúdo anterior
     {% for item in cart_items %}
     cartItemsElement.innerHTML += `
-      <p><strong>Produto:</strong> {{ item.produto.nome }} - <strong>Quantidade:</strong> {{ item.quantidade }} - <strong>Preço:</strong> R$ {{ item.produto.preco }}</p>
+      <p><strong>Produto:</strong> {{ item.produto.nome }} - <strong>Quantidade:</strong> {{ item.quantidade }}</p>
     `;
     {% endfor %}
-  }
+}
 
   function confirmarOrcamento() {
     const form = document.getElementById('locacao-form');

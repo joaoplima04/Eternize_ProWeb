@@ -48,6 +48,8 @@ class Cliente(Base):
     data_nascimento = Column(Date)
     password = Column(String(128))
 
+    itens_carrinho = relationship("ItemCarrinho", back_populates="cliente")
+
     def __repr__(self):
         return f"<Cliente(nome='{self.nome}', email='{self.email}')>"
 
@@ -74,10 +76,12 @@ class ItemCarrinho(Base):
     __tablename__ = 'itemCarrinho'
 
     id = Column(Integer, primary_key=True, index=True)
+    cliente_cpf = Column(String(14), ForeignKey("cliente.cpf"))
     produto_id = Column(Integer, ForeignKey('produto.id'))
-    quantidade = Column(Integer, nullable=False)
     aluguel_id = Column(Integer, ForeignKey('aluguel.id'))
+    quantidade = Column(Integer, nullable=False)
 
+    cliente = relationship("Cliente", back_populates="itens_carrinho")
     produto = relationship("Produto")
     aluguel = relationship("Aluguel", back_populates="itens_carrinho")
 

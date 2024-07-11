@@ -29,7 +29,10 @@ def create_produto(db: Session, produto: schemas.ProdutoCreate, imagem: UploadFi
 
 # Funções CRUD para o modelo Cliente
 
-def get_cliente(db: Session, cliente_email: str):
+def get_cliente(db: Session, cliente_cpf: str):
+    return db.query(models.Cliente).filter(models.Cliente.cpf == cliente_cpf).first()
+
+def get_cliente_by_email(db: Session, cliente_email: str):
     return db.query(models.Cliente).filter(models.Cliente.email == cliente_email).first()
 
 def get_clientes(db: Session, skip: int = 0, limit: int = 10):
@@ -66,6 +69,8 @@ def create_aluguel(db: Session, aluguel: schemas.AluguelCreate):
     db.refresh(db_aluguel)
     return db_aluguel
 
+# Entrega
+
 def create_entrega(db: Session, entrega: schemas.EntregaCreate):
     db_entrega = models.Entrega(**entrega.dict())
     db.add(db_entrega)
@@ -76,7 +81,21 @@ def create_entrega(db: Session, entrega: schemas.EntregaCreate):
 def get_entrega(db: Session, entrega_id: int):
     return db.query(models.Entrega).filter(models.Entrega.id == entrega_id).first()
 
-def get_cart_total(db: Session, aluguel_id: int) -> float:
-    cart_items = db.query(models.ItemCarrinho).filter_by(aluguel_id=aluguel_id).all()
-    cart_total = sum(item.produto.preco * item.quantidade for item in cart_items)
+# Carrinho / ItemCarrinho
+
+def get_preco_unitario(db: Session, produto_id: int) -> float:
+    produto = db.query(models.Produto).filter_by(produto_id=produto_id).first()
+    return produto.preco
+
+def get_cart_items(db: Session, cliente_cpf: str):
+    return db.query(models.ItemCarrinho).filter(models.ItemCarrinho.cliente_cpf == cliente_cpf, models.ItemCarrinho.aluguel_id == None).all()
+
+def get_cart_total(db: Session, cliente_cpf: str) -> float:
+    cart_items = get_cart_items(db, cliente_cpf=cliente_cpf)
+    cart_total = sum(get_preco_unitario(item.produto_id) * item.quantidade for item in cart_items)
     return cart_total
+
+def clear_cart(db: Session, aluguel_id: int):
+    db.query(models.ItemCarrinho).filter(models.ItemCarrinho.aluguel_id == aluguel_id).delete()
+    db.commit()
+

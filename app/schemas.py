@@ -81,7 +81,10 @@ class EntregaBase(BaseModel):
     nome_destinatario: Optional[str] = None
 
 class EntregaCreate(EntregaBase):
-    aluguel_id: int 
+    aluguel_id: int
+
+    def to_dict(self):
+        return self.dict()   
 
 class Entrega(EntregaBase):
     id: int
