@@ -24,8 +24,8 @@ def get_register(request: Request, db: Session = Depends(get_db)):
             "message": "Seu login já está ativo! Deseja fazer o logoff?",
             "request": request
         }
-        return templates.TemplateResponse("categorias/login.html", context)
-    return templates.TemplateResponse("categorias/cadastro.html", {"request": request})
+        return templates.TemplateResponse("login.html", context)
+    return templates.TemplateResponse("cadastro.html", {"request": request})
 
 def get_cliente_form(
     cpf: str = Form(...),
@@ -56,7 +56,7 @@ def create_cliente(cliente: schemas.ClienteCreate = Depends(get_cliente_form), d
     response = RedirectResponse(url="/", status_code=303)
     response.set_cookie(key="cpf", value=new_cliente.cpf, httponly=True)
     response.set_cookie(key="access_token", value=access_token, httponly=True)
-    response.set_cookie(key="welcome_message", value=f"Bem vindo {new_cliente.nome}!")
+    response.set_cookie(key="message", value=f"Bem vindo {new_cliente.nome}!", expires=timedelta(minutes=1))
     return response
 
 @router.get("/login", response_class=HTMLResponse)
@@ -75,14 +75,14 @@ def get_login(request: Request, db: Session = Depends(get_db)):
             "message": "Seu login já está ativo! Deseja fazer o logoff?",
             "request": request
         }
-        return templates.TemplateResponse("categorias/login.html", context)
+        return templates.TemplateResponse("login.html", context)
     else:
         # Trata o caso onde não há usuário logado ou o token é inválido
         context = {
             "request": request,
             "next": "/"
         }
-        return templates.TemplateResponse("categorias/login.html", context)
+        return templates.TemplateResponse("login.html", context)
 
 
 @router.post("/login_user/")
@@ -100,7 +100,7 @@ def login(email: str = Form(...), password: str = Form(...), next: str = Form(..
     access_token = auth.create_access_token(data={"sub": user.email}, expires_delta=timedelta(minutes=60))
     response = RedirectResponse(url=next, status_code=303)
     response.set_cookie(key="cpf", value=user.cpf, httponly=True, max_age=3600)
-    response.set_cookie(key="welcome_message", value=f"Bem vindo {user.nome}!", max_age=3600)
+    response.set_cookie(key="message", value=f"Bem vindo {user.nome}!", max_age=3600)
     response.set_cookie(key="access_token", value=access_token, httponly=True, max_age=3600)
     return response
 
@@ -108,6 +108,6 @@ def login(email: str = Form(...), password: str = Form(...), next: str = Form(..
 def logout():
     response = RedirectResponse(url="/users/login")
     response.delete_cookie(key="access_token")
-    response.delete_cookie(key="welcome_message")
+    response.delete_cookie(key="message")
     response.delete_cookie(key="cpf")
     return response

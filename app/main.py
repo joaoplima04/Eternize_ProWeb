@@ -13,11 +13,20 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    welcome_message = request.cookies.get("welcome_message")
+    message = request.cookies.get("message")
     context = {"request": request}
-    if welcome_message:
-        context["welcome_message"] = welcome_message
-    return templates.TemplateResponse("categorias/index.html", context)
+    if message:
+        context["message"] = message
+    return templates.TemplateResponse("index.html", context)
+
+@app.get("/messages/", response_class=HTMLResponse)
+def get_message(request:Request):
+    message = request.cookies.get("message")
+    context = {
+        "request": request,
+        "message": message
+    }
+    return templates.TemplateResponse("messages.html", context)
 
 app.include_router(products.router, prefix="/produtos", tags=["products"])
 app.include_router(categories.router, prefix="/categories", tags=["categories"])

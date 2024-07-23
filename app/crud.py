@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from . import models, schemas
 import shutil
-from fastapi import UploadFile
+from fastapi import UploadFile, Request
 from .auth import get_password_hash
 
 # Funções CRUD para o modelo Produto
@@ -17,7 +17,7 @@ def create_produto(db: Session, produto: schemas.ProdutoCreate, imagem: UploadFi
     db_produto = models.Produto(**produto.dict())
     
     if imagem:
-        file_location = f"static/images/{imagem.filename}"
+        file_location = f"static/imagens/{imagem.filename}"
         with open(file_location, "wb+") as file_object:
             shutil.copyfileobj(imagem.file, file_object)
         db_produto.imagem = file_location
@@ -84,15 +84,23 @@ def get_entrega(db: Session, entrega_id: int):
 # Carrinho / ItemCarrinho
 
 def get_preco_unitario(db: Session, produto_id: int) -> float:
-    produto = db.query(models.Produto).filter_by(produto_id=produto_id).first()
+    produto = db.query(models.Produto).filter_by(id=produto_id).first()
     return produto.preco
+
+'''
+def create_cart_item(db: Session, produto_id: int, request: Request):
+    cliente_cpf = request.cookies.get("cpf")
+    novo_item = models.ItemCarrinho(produto_id=produto_id, quantidade=1, cliente_cpf=cliente_cpf)
+    db.add(novo_item)
+    db.commit()
+'''
 
 def get_cart_items(db: Session, cliente_cpf: str):
     return db.query(models.ItemCarrinho).filter(models.ItemCarrinho.cliente_cpf == cliente_cpf, models.ItemCarrinho.aluguel_id == None).all()
 
 def get_cart_total(db: Session, cliente_cpf: str) -> float:
-    cart_items = get_cart_items(db, cliente_cpf=cliente_cpf)
-    cart_total = sum(get_preco_unitario(item.produto_id) * item.quantidade for item in cart_items)
+    cart_items = get_cart_items(db=db, cliente_cpf=cliente_cpf)
+    cart_total = sum(get_preco_unitario(db=db, produto_id=item.produto_id) * item.quantidade for item in cart_items)
     return cart_total
 
 def clear_cart(db: Session, aluguel_id: int):

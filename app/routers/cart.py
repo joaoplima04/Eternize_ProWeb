@@ -27,13 +27,14 @@ def cart_view(request: Request, db: Session = Depends(get_db)):
             "request": request,
             "next": "/cart/"
         }
-        return templates.TemplateResponse("categorias/login.html", context)
-    cart_items = db.query(ItemCarrinho).all()
-    return templates.TemplateResponse("categorias/carrinho.html", {"request": request, "cart_items": cart_items})
+        return templates.TemplateResponse("login.html", context)
+    cart_items = db.query(ItemCarrinho).filter(ItemCarrinho.aluguel_id == None).all()
+    print(cart_items)
+    return templates.TemplateResponse("carrinho.html", {"request": request, "cart_items": cart_items})
 
 # Adicionar ao carrinho
 @router.post("/add_to_cart/{produto_id}/")
-def add_to_cart_endpoint(produto_id: int, db: Session = Depends(get_db)):
+def add_to_cart_endpoint(request: Request, produto_id: int, db: Session = Depends(get_db)):
     produto = db.query(Produto).filter(Produto.id == produto_id).first()
     if not produto:
         raise HTTPException(status_code=404, detail="Produto não encontrado")
@@ -42,8 +43,9 @@ def add_to_cart_endpoint(produto_id: int, db: Session = Depends(get_db)):
     if item_carrinho:
         item_carrinho.quantidade += 1
     else:
-        new_item = ItemCarrinho(produto_id=produto_id, quantidade=1)
-        db.add(new_item)
+        cliente_cpf = request.cookies.get("cpf")
+        novo_item = ItemCarrinho(produto_id=produto_id, quantidade=1, cliente_cpf=cliente_cpf)
+        db.add(novo_item)
     db.commit()
     
     return Response(status_code=200)

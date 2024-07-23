@@ -83,9 +83,13 @@ def create_locacao(retorno = Depends(get_aluguel_form), db: Session = Depends(ge
         crud.create_entrega(db=db, entrega=schemas.EntregaCreate(**entrega_data))
 
     cart_items = crud.get_cart_items(db, cliente_cpf=cliente.cpf)
+    print(cart_items)
     for item in cart_items:
         item.aluguel_id = new_aluguel.id
         db.commit()
         db.refresh(item)
+    
+    response = RedirectResponse("/messages/", status_code=303)
+    response.set_cookie(key="message", value=f"Recebemos a sua locação {cliente.nome}! \n Metade do valor da locação deve ser abatido até um dia antes do início para a confirmação da locação. \n O contrato foi enviado por e-mail e deve ser assinado ao receber os itens. \n Qualquer dúvida, sinta-se a vontade de entrar em contato conosco por Whatsapp: 6199619-8023")
 
-    return RedirectResponse("/", status_code=303)
+    return response
