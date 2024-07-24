@@ -56,7 +56,7 @@ def create_cliente(cliente: schemas.ClienteCreate = Depends(get_cliente_form), d
     response = RedirectResponse(url="/", status_code=303)
     response.set_cookie(key="cpf", value=new_cliente.cpf, httponly=True)
     response.set_cookie(key="access_token", value=access_token, httponly=True)
-    response.set_cookie(key="message", value=f"Bem vindo {new_cliente.nome}!", expires=timedelta(minutes=1))
+    response.set_cookie(key="Welcome_message", value=f"Bem vindo {new_cliente.nome}!", expires=timedelta(minutes=5))
     return response
 
 @router.get("/login", response_class=HTMLResponse)

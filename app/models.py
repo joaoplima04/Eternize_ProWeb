@@ -47,6 +47,7 @@ class Cliente(Base):
     telefone = Column(String(20))
     data_nascimento = Column(Date)
     password = Column(String(128))
+    superuser = Column(Boolean, default=False)
 
     itens_carrinho = relationship("ItemCarrinho", back_populates="cliente")
 

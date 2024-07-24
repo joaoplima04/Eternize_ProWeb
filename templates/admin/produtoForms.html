@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Cadastro de Produto</h1>
+    <form action="/admin/produto/cadastro" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome do Produto</label>
+        <input type="text" class="form-control" id="nome" name="nome" required>
+      </div>
+      <div class="mb-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select class="form-select" id="categoria" name="categoria" required>
+          <option selected disabled value="">Selecione uma categoria</option>
+          <option value="PRATO_RASO">Prato Raso</option>
+          <option value="GUARDANAPO">Guardanapo</option>
+          <option value="TALHER">Talher</option>
+          <option value="TACAS">Taças</option>
+          <option value="TRILHOS_DE_MESA">Trilhos de Mesa</option>
+          <option value="SOUSPLAT">Sousplat</option>
+          <option value="JOGO_AMERICANO">Jogo Americano</option>
+          <option value="CHA_E_CAFE">Chá e Café</option>
+          <option value="PRATO_SOBREMESA">Prato Sobremesa</option>
+          <option value="PORTA_GUARDANAPO">Porta Guardanapo</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="preco" class="form-label">Preço</label>
+        <input type="number" step="0.01" class="form-control" id="preco" name="preco" required>
+      </div>
+      <div class="mb-3">
+        <label for="quantidade_estoque" class="form-label">Quantidade em Estoque</label>
+        <input type="number" class="form-control" id="quantidade_estoque" name="quantidade_estoque" required>
+      </div>
+      <div class="mb-3">
+        <label for="imagem" class="form-label">Imagem do Produto</label>
+        <input type="file" class="form-control" id="imagem" name="imagem">
+      </div>
+      <div class="mb-3">
+        <label for="cor" class="form-label">Cor</label>
+        <input type="text" class="form-control" id="cor" name="cor" required>
+      </div>
+      <div class="mb-3">
+        <label for="estilo" class="form-label">Estilo</label>
+        <select class="form-select" id="estilo" name="estilo" required>
+          <option selected disabled value="">Selecione um estilo</option>
+          <option value="ELEGANTE">Elegante</option>
+          <option value="TROPICAL">Tropical</option>
+          <option value="FLORIDO">Florido</option>
+        </select>
+      </div>
+      <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="publicado" name="publicado">
+        <label class="form-check-label" for="publicado">Publicado</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
+    </form>
+  </div>
+  {% endblock %}
