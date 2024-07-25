@@ -4,21 +4,21 @@ from datetime import date
 from enum import Enum
 
 class Categoria(str, Enum):
-    PRATO_RASO = "Prato Raso"
-    GUARDANAPO = "Guardanapo"
-    TALHER = "Talher"
-    TACAS = "Tacas"
-    TRILHOS_DE_MESA = "Trilhos de Mesa"
-    SOUSPLAT = "Sousplat"
-    JOGO_AMERICANO = "Jogo Americano"
-    CHA_E_CAFE = "Cha e Cafe"
-    PRATO_SOBREMESA = "Prato Sobremesa"
-    PORTA_GUARDANAPO = "Porta Guardanapo"
+    PRATO_RASO = "PRATO_RASO"
+    GUARDANAPO = "GUARDANAPO"
+    TALHER = "TALHER"
+    TACAS = "TACAS"
+    TRILHOS_DE_MESA = "TRILHOS_DE_MESA"
+    SOUSPLAT = "SOUSPLAT"
+    JOGO_AMERICANO = "JOGO_AMERICANO"
+    CHA_E_CAFE = "CHA_E_CAFE"
+    PRATO_SOBREMESA = "PRATO_SOBREMESA"
+    PORTA_GUARDANAPO = "PORTA_GUARDANAPO"
 
 class Estilo(str, Enum):
-    ELEGANTE = "Elegante"
-    TROPICAL = "Tropical"
-    FLORIDO = "Florido"
+    ELEGANTE = "ELEGANTE"
+    TROPICAL = "TROPICAL"
+    FLORIDO = "FLORIDO"
 
 class ProdutoBase(BaseModel):
     nome: str

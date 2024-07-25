@@ -25,7 +25,7 @@ class Estilo(enum.Enum):
 class Produto(Base):
     __tablename__ = 'produto'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(100))
     categoria = Column(Enum(Categoria))
     preco = Column(Float)

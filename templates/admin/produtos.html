@@ -1,0 +1,57 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Lista de Produtos</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Quantidade em Estoque</th>
+                <th>Imagem</th>
+                <th>Cor</th>
+                <th>Estilo</th>
+                <th>Publicado</th>
+            </tr>
+        </thead>
+        <tbody id="produto-table-body">
+            <!-- Os dados serão inseridos aqui -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    async function fetchProdutos() {
+        const response = await fetch('/admin/produtos/');
+        const produtos = await response.json();
+
+        const tableBody = document.getElementById('produto-table-body');
+        tableBody.innerHTML = '';
+
+        produtos.forEach(produto => {
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${produto.id}</td>
+                <td>${produto.nome}</td>
+                <td>${produto.categoria}</td>
+                <td>${produto.preco}</td>
+                <td>${produto.quantidade_estoque}</td>
+                <td><img src="${produto.imagem}" alt="${produto.nome}" style="width: 50px; height: auto;"></td>
+                <td>${produto.cor}</td>
+                <td>${produto.estilo}</td>
+                <td>${produto.publicado}</td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    window.onload = fetchProdutos;
+</script>
+
+{% endblock %}

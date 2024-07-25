@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, Form, UploadFile, File
+from typing import List
+from fastapi import APIRouter, Depends, File, HTTPException, Request, Form, UploadFile
 from fastapi.responses import HTMLResponse, Response, RedirectResponse
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -28,7 +29,7 @@ def get_produto_form(
     publicado: bool = Form(...),    
 ) -> schemas.ProdutoCreate:
     if imagem:
-        imagem_path = f"static/images/{imagem.filename}"
+        imagem_path = f"static/imagens/{imagem.filename}"
         with open(imagem_path, "wb") as buffer:
             buffer.write(imagem.file.read())
     else:
@@ -39,20 +40,29 @@ def get_produto_form(
         categoria=categoria,
         preco=preco,
         quantidade_estoque=quantidade_estoque,
-        imagem=imagem_path,
+        imagem=f"imagens/{imagem.filename}",
         cor=cor,
         estilo=estilo,
         publicado=publicado
     )
 
-@router.post("/cadastro_produto/", respose_model=schemas.Produto)
+@router.post("/cadastro_produto/")
 def create_produto(produto: schemas.ProdutoCreate = Depends(get_produto_form), db: Session = Depends(get_db)):
     crud.create_produto(db=db, produto=produto)
 
-    response = RedirectResponse(url="/add_produto" , status_code=303)
+    response = RedirectResponse(url="/admin/add_produto" , status_code=303)
 
     response.set_cookie(key="admin_message", value="Produto adicionado com sucesso!", expires=timedelta(seconds=30))
 
     return response
+
+@router.get("/produtos/", response_model=List[schemas.Produto])
+def read_produtos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    produtos = crud.get_produtos(db, skip=skip, limit=limit)
+    return produtos
+
+@router.get("/visualizar_produtos/", response_class=HTMLResponse)
+def visualizar_produtos(request: Request):
+    return templates.TemplateResponse("admin/produtos.html", {"request": request})
 
 
