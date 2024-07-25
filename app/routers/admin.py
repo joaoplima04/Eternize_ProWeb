@@ -15,7 +15,7 @@ def admin_view(request: Request):
     return templates.TemplateResponse("admin/base.html", context={"request":request})
 
 @router.get("/add_produto", response_class=HTMLResponse)
-def admin_view(request: Request):
+def cadastro_produto_view(request: Request):
     return templates.TemplateResponse("admin/produtoForms.html", context={"request":request})
 
 def get_produto_form(
@@ -57,12 +57,19 @@ def create_produto(produto: schemas.ProdutoCreate = Depends(get_produto_form), d
     return response
 
 @router.get("/produtos/", response_model=List[schemas.Produto])
-def read_produtos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    produtos = crud.get_produtos(db, skip=skip, limit=limit)
+def read_produtos(categoria: str = '', db: Session = Depends(get_db)):
+    if categoria:
+        produtos = db.query(Produto).filter(Produto.categoria == categoria).all()
+    else:
+        produtos = db.query(Produto).all()
     return produtos
 
 @router.get("/visualizar_produtos/", response_class=HTMLResponse)
 def visualizar_produtos(request: Request):
     return templates.TemplateResponse("admin/produtos.html", {"request": request})
 
+@router.get("/editar_produto/{produto_id}", response_class=HTMLResponse)
+async def editar_produto(request: Request, produto_id: int, db: Session = Depends(get_db)):
+    produto = db.query(Produto).filter(Produto.id == produto_id).first()
+    return templates.TemplateResponse("admin/editar_produto.html", {"request": request, "produto": produto})
 

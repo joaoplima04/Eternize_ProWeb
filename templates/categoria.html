@@ -15,7 +15,7 @@
         <div class="cards">
             <img src="{{ url_for('static', path=produto.imagem) }}" class="imagem2">
             <p class="dg">{{ produto.nome }}</p>
-            <a href="#" class="ancor" onclick="event.preventDefault(); addToCart({{ produto.id }});">Alugar</a>
+            <a href="#" class="btn btn-outline-warning" onclick="event.preventDefault(); addToCart({{ produto.id }});">Alugar</a>
         </div>
         {% endfor %}
     </section>

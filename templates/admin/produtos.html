@@ -4,7 +4,25 @@
 
 <div class="container mt-5">
     <h1 class="mb-4">Lista de Produtos</h1>
-    <table class="table table-striped">
+    <div class="mb-4">
+        <label for="categoria-select" class="form-label">Filtrar por Categoria:</label>
+        <select id="categoria-select" class="form-select" default:"">
+            <option value="">Todas</option>
+            <option value="PRATO_RASO">Prato Raso</option>
+            <option value="GUARDANAPO">Guardanapo</option>
+            <option value="TALHER">Talher</option>
+            <option value="TACAS">Taças</option>
+            <option value="TRILHOS_DE_MESA">Trilhos de Mesa</option>
+            <option value="SOUSPLAT">Sousplat</option>
+            <option value="JOGO_AMERICANO">Jogo Americano</option>
+            <option value="CHA_E_CAFE">Chá e Café</option>
+            <option value="PRATO_SOBREMESA">Prato Sobremesa</option>
+            <option value="PORTA_GUARDANAPO">Porta Guardanapo</option>
+        </select>
+        <button class="btn btn-primary mt-2" onclick="filterProdutos()">Filtrar</button>
+        <a href="/admin/add_produto/" class="btn btn-success mt-2">Cadastrar Novo Produto</a>
+    </div>
+    <table class="table table-striped text-center">
         <thead>
             <tr>
                 <th>ID</th>
@@ -16,6 +34,7 @@
                 <th>Cor</th>
                 <th>Estilo</th>
                 <th>Publicado</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody id="produto-table-body">
@@ -25,8 +44,12 @@
 </div>
 
 <script>
-    async function fetchProdutos() {
-        const response = await fetch('/admin/produtos/');
+    async function fetchProdutos(categoria = '') {
+        let url = '/admin/produtos/';
+        if (categoria) {
+            url += `?categoria=${categoria}`;
+        }
+        const response = await fetch(url);
         const produtos = await response.json();
 
         const tableBody = document.getElementById('produto-table-body');
@@ -41,17 +64,29 @@
                 <td>${produto.categoria}</td>
                 <td>${produto.preco}</td>
                 <td>${produto.quantidade_estoque}</td>
-                <td><img src="${produto.imagem}" alt="${produto.nome}" style="width: 50px; height: auto;"></td>
+                <td><img src="/static/${produto.imagem}" alt="${produto.nome}" style="width: 50px; height: auto;"></td>
                 <td>${produto.cor}</td>
                 <td>${produto.estilo}</td>
                 <td>${produto.publicado}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editProduto(${produto.id})">Editar</button>
+                </td>
             `;
 
             tableBody.appendChild(row);
         });
     }
 
-    window.onload = fetchProdutos;
+    function filterProdutos() {
+        const categoria = document.getElementById('categoria-select').value;
+        fetchProdutos(categoria);
+    }
+
+    function editProduto(id) {
+        window.location.href = `/admin/editar_produto/${id}`;
+    }
+
+    window.onload = filterProdutos();
 </script>
 
 {% endblock %}

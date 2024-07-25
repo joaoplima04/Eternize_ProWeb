@@ -9,8 +9,8 @@ from .auth import get_password_hash
 def get_produto(db: Session, produto_id: int):
     return db.query(models.Produto).filter(models.Produto.id == produto_id).first()
 
-def get_produtos(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(models.Produto).offset(skip).limit(limit).all()
+def get_produtos(db: Session, skip: int = 0):
+    return db.query(models.Produto).offset(skip).all()
 
 
 def create_produto(db: Session, produto: schemas.ProdutoCreate, imagem: UploadFile = None):
