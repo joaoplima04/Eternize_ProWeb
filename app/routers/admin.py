@@ -73,3 +73,21 @@ async def editar_produto(request: Request, produto_id: int, db: Session = Depend
     produto = db.query(Produto).filter(Produto.id == produto_id).first()
     return templates.TemplateResponse("admin/editar_produto.html", {"request": request, "produto": produto})
 
+@router.put("/produtos/{produto_id}")
+def update_produto(produto_id: int, produto: schemas.ProdutoCreate, db: Session = Depends(get_db), file: UploadFile = File(None)):
+    db_produto = db.query(Produto).filter(Produto.id == produto_id).first()
+    if not db_produto:
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+
+    for key, value in produto.dict().items():
+        setattr(db_produto, key, value)
+
+    if file:
+        file_location = f"/static/{file.filename}"
+        with open(file_location, "wb") as f:
+            f.write(file.file.read())
+        db_produto.imagem = file.filename
+
+    db.commit()
+    db.refresh(db_produto)
+    return db_produto

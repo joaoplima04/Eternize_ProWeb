@@ -11,11 +11,20 @@
         </div>
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="categoria" name="categoria" value="{{ produto.categoria }}">
+            <select class="form-select" id="categoria" name="categoria" required>
+                <option value="PRATO_RASO" {% if produto.categoria == 'PRATO_RASO' %}selected{% endif %}>Prato Raso</option>
+                <option value="GUARDANAPO" {% if produto.categoria == 'Categoria.GUARDANAPO' %}selected{% endif %}>Guardanapo</option>
+                <option value="TALHER" {% if produto.categoria == 'TALHER' %}selected{% endif %}>Talher</option>
+                <option value="TRILHOS_DE_MESA" {% if produto.categoria == 'TRILHOS_DE_MESA' %}selected{% endif %}>Trilhos de Mesa</option>
+                <option value="JOGO_AMERICANO" {% if produto.categoria == 'JOGO_AMERICANO' %}selected{% endif %}>Jogo Americano</option>
+                <option value="SOUSPLAT" {% if produto.categoria == 'SOUSPLAT' %}selected{% endif %}>Sousplat</option>
+                <option value="CHA_E_CAFE" {% if produto.categoria == 'CHA_E_CAFE' %}selected{% endif %}>Chá e Café</option>
+                <option value="PRATO_SOBREMESA" {% if produto.categoria == 'PRATO_SOBREMESA' %}selected{% endif %}>Prato Sobremesa</option>
+                <option value="PORTA_GUARDANAPO" {% if produto.categoria == 'PORTA_GUARDANAPO' %}selected{% endif %}>Porta Guardanapo</option>
+            </select>    
         </div>
         <div class="mb-3">
             <label for="preco" class="form-label">Preço</label>
-            <input type="number" step="0.01" class="form-control" id="preco" name="preco" value="{{ produto.preco }}">
         </div>
         <div class="mb-3">
             <label for="quantidade_estoque" class="form-label">Quantidade em Estoque</label>
@@ -23,7 +32,7 @@
         </div>
         <div class="mb-3">
             <label for="imagem" class="form-label">Imagem</label>
-            <input type="text" class="form-control" id="imagem" name="imagem" value="{{ produto.imagem }}">
+            <input type="file" class="form-control" id="imagem" name="imagem" value="{{ produto.imagem }}">
         </div>
         <div class="mb-3">
             <label for="cor" class="form-label">Cor</label>
@@ -31,7 +40,11 @@
         </div>
         <div class="mb-3">
             <label for="estilo" class="form-label">Estilo</label>
-            <input type="text" class="form-control" id="estilo" name="estilo" value="{{ produto.estilo }}">
+            <select class="form-select" id="estilo" name="estilo" required>
+                <option value="ELEGANTE" {% if produto.estilo == 'ELEGANTE' %}selected{% endif %}>Elegante</option>
+                <option value="TROPICAL" {% if produto.estilo == 'TROPICAL' %}selected{% endif %}>Tropical</option>
+                <option value="FLORIDO" {% if produto.estilo == 'FLORIDO' %}selected{% endif %}>Florido</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="publicado" class="form-label">Publicado</label>
@@ -48,7 +61,7 @@
         const data = Object.fromEntries(formData.entries());
         data.publicado = formData.has('publicado');
 
-        const response = await fetch('/produtos/' + {{ produto.id }}, {
+        const response = await fetch('/admin/produtos/' + {{ produto.id }}, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
