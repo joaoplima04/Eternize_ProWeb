@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Visualizar Locações</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Entrega</th>
+                <th>Devolução</th>
+                <th>Situação</th>
+                <th>Total (R$)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aluguel in locacoes %}
+            <tr>
+                <td>
+                    <strong>{{ aluguel.cliente.nome }}</strong><br>
+                    {{ aluguel.cliente.telefone }}<br>
+                </td>
+                <td>
+                    {{ aluguel.tipo_entrega }}<br>
+                    {{ aluguel.data_aluguel | format_date("%d/%m/%Y") }} {{ aluguel.hora_inicial | format_time("%H:%M")}}
+                </td>
+                <td>
+                    {{ aluguel.tipo_devolucao }}<br>
+                    {{ aluguel.data_devolucao | format_date("%d/%m/%Y") }} {{ aluguel.hora_final | format_time("%H:%M")}}
+
+                </td>
+                <td>
+                    <span class="badge bg-{{ aluguel.situacao | lower }}">{{ aluguel.situacao }}</span>
+                </td>
+                <td>R$ {{ aluguel.preco_total | round(2) }}</td>
+                <td>
+                    <button class="btn btn-light btn-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </button>
+                    <button class="btn btn-warning btn-icon">
+                        <i class="bi bi-truck"></i>
+                    </button>
+                    <button class="btn btn-primary btn-icon">
+                        <i class="bi bi-file-earmark"></i>
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Ação 1</a></li>
+                            <li><a class="dropdown-item" href="#">Ação 2</a></li>
+                            <li><a class="dropdown-item" href="#">Ação 3</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

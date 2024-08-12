@@ -4,9 +4,11 @@ from fastapi.responses import HTMLResponse, Response, RedirectResponse
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from ..database import get_db
-from ..models import Produto, ItemCarrinho
+from ..models import Produto, ItemCarrinho, Aluguel
 from ..config import templates
 from .. import schemas, crud
+from jinja2 import Environment
+from datetime import datetime
 
 router = APIRouter()
 
@@ -91,3 +93,20 @@ def update_produto(produto_id: int, produto: schemas.ProdutoCreate, db: Session 
     db.commit()
     db.refresh(db_produto)
     return db_produto
+
+@router.get("/visualizar_locacoes/")
+def visualizar_locacoes(request: Request, db: Session = Depends(get_db)):
+    locacoes = db.query(Aluguel).all()
+    return templates.TemplateResponse("admin/locacoes.html", {"request": request, "locacoes": locacoes})
+
+#Filtro date
+def format_date(value, format="%d %b %Y %H:%M"):
+    return value.strftime(format)
+
+#Filtro Time
+def format_time(value, format="%H:%M"):
+    return value.strftime(format)
+
+# Adicione os filtros ao ambiente do Jinja2
+templates.env.filters['format_date'] = format_date
+templates.env.filters['format_time'] = format_time
