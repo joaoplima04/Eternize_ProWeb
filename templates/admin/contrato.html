@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Locação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        .clausulas {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+        }
+        .assinaturas {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .assinaturas p {
+            margin-bottom: 60px;
+        }
+        .assinaturas div {
+            display: inline-block;
+            width: 45%;
+            text-align: center;
+            margin-right: 5%;
+        }
+        .assinaturas div:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>CONTRATO DE LOCAÇÃO E TERMO DE RESPONSABILIDADE</h1>
+
+    <p><strong>Cliente:</strong> {{ cliente_nome }}</p>
+    <p><strong>CPF/CNPJ:</strong> {{ cliente_cpf_cnpj }}</p>
+    <p><strong>Telefone(s):</strong> {{ cliente_telefone }}</p>
+
+    <p><strong>Data do Pedido:</strong> {{ data_pedido }}</p>
+    <p><strong>Data de Confirmação:</strong> {{ data_confirmacao }}</p>
+    <p><strong>Início Locação:</strong> {{ inicio_locacao }}</p>
+    <p><strong>Término Locação:</strong> {{ termino_locacao }}</p>
+    <p><strong>Objetivo da Locação:</strong> {{ objetivo_locacao }}</p>
+
+    <h2>INFORMAÇÕES DE LOGÍSTICA</h2>
+    <p><strong>Entrega:</strong> {{ data_entrega }} às {{ hora_entrega }}</p>
+    <p><strong>Devolução:</strong> {{ data_devolucao }} às {{ hora_devolucao }}</p>
+
+    <h2>LISTA DE ITENS</h2>
+    <ul>
+        {% for item in itens %}
+            <li><strong>{{ item.nome }}</strong> - Quantidade: {{ item.quantidade }} - Preço Unitário: R$ {{ item.preco_unitario }} - Total: R$ {{ item.total }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="clausulas">CLÁUSULAS DO CONTRATO</h2>
+    <p><strong>LOCADORA:</strong> ETERNIZE LOCAÇÃO, representada por Rigomar Nunes Pereira Lima, situado na CLSW 504 – BLOCO B – LOJA 56 – SETOR SUDOESTE, na cidade de Brasília, CNPJ Nº 54.129.589.0001-51.</p>
+
+    <p><strong>1ª DO OBJETIVO DA LOCAÇÃO:</strong> Este contrato se destina a locação de ITENS PARA MESA POSTA para a realização de festas e eventos em geral. É vedada a transferência dos itens para locais diferentes do deste contrato. Os objetivos deste contrato são os descritos no pedido.</p>
+
+    <p><strong>2ª PREÇO E PAGAMENTO:</strong> Pela locação dos bens acima mencionados, o locatário pagará pelo valor descrito no pedido. O pagamento de 50% deverá ser efetuado no ato da reserva e o restante no dia do evento.</p>
+
+    <p><strong>3ª CONDIÇÕES DE RENOVAÇÃO:</strong> Não ocorrendo à devolução dos materiais e equipamentos até o último dia de vigência do prazo de locação deste contrato, o mesmo está automaticamente renovado por igual período, emitindo-se nova fatura. O valor de locação para o novo período será o valor da tabela vigente no início do novo período. A LOCADORA reserva-se o direito de não renovar o contrato caso haja alguma cláusula que não seja integralmente cumprida, incluindo-se a inadimplência dos pagamentos das faturas, exigindo-se a devolução imediata dos bens locados.</p>
+
+    <p><strong>4ª TÉRMINO DO CONTRATO:</strong> Observando-se a cláusula 3ª, o término do contrato ocorrerá somente quando a entrega efetiva de todos os bens contratados, após ter se verificado que os mesmos estejam em perfeito estado, tais como foram recebidos.</p>
+
+    <p><strong>5ª REPOSIÇÃO DOS BENS:</strong> Em caso de extravio, furto, roubo ou qualquer outro evento que impossibilite a devolução dos bens locados, a LOCATÁRIA pagará à LOCADORA o valor de mercado dos bens faltantes (VALOR DE REPOSIÇÃO), sendo que a locação será cobrada até a efetiva comprovação deste pagamento.</p>
+
+    <p><strong>6ª DAS CONDIÇÕES DO CONTRATO:</strong> Durante o tempo em que durar a locação e até a efetiva entrega dos bens locados, o locatário ficará como fiel depositário dos mesmos.</p>
+
+    <p><strong>7ª MANUTENÇÃO E LIMPEZA DOS MATERIAIS:</strong> Correrá por conta da LOCADORA toda limpeza dos jogos americanos, trilhos e guardanapos, da forma correta para manter o padrão de qualidade dos materiais. E ficará por conta da LOCATÁRIA a limpeza dos demais materiais com o devido cuidado que as peças exigem, não podendo usar esponja de aço evitando que arranhem.</p>
+
+    <p><strong>8ª ACEITAÇÃO:</strong> Aceitação da mercadoria ora locada através da assinatura do canhoto do documento “CHECK LIST” que é feito na entrega do material, o mesmo acontece na devolução do material o documento entregue dando o aceite do retorno do material que implica na finalização deste contrato.</p>
+
+    <p>Fica eleito o fórum da comarca de BRASÍLIA, exclusivamente como competência para reconhecer e dirimir quaisquer dúvidas oriundas deste contrato.</p>
+
+    <p>Por estarem de assim justo e contratado, havendo as partes lido e achado conforme as cláusulas impressas, assinam o presente em duas vias de igual teor para um só efeito.</p>
+
+    <div class="assinaturas">
+        <div>
+            <p>__________________________________<br>CONTRATANTE<br>{{ cliente_nome }}<br>CPF: {{ cliente_cpf_cnpj }}</p>
+        </div>
+        <div>
+            <p>__________________________________<br>CONTRATADA<br>ETERNIZE LOCAÇÃO<br>CNPJ: 54.129.589/0001-51</p>
+        </div>
+    </div>
+
+    <p><strong>Brasília, {{ data_contrato }}.</strong></p>
+</body>
+</html>
