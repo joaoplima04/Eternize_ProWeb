@@ -62,10 +62,13 @@ class Aluguel(Base):
     cliente = relationship("Cliente")
     data_aluguel = Column(Date)
     hora_inicial = Column(Time)
+    data_pedido = Column(Date)
+    objetivo = Column(String)
     data_devolucao = Column(Date)
     hora_final = Column(Time)
     preco_total = Column(Float)
     tipo_entrega = Column(String, nullable=False)
+    contrato = Column(String)
 
     entrega = relationship("Entrega", uselist=False, back_populates="aluguel")
     itens_carrinho = relationship("ItemCarrinho", back_populates="aluguel")
@@ -81,6 +84,7 @@ class ItemCarrinho(Base):
     produto_id = Column(Integer, ForeignKey('produto.id'))
     aluguel_id = Column(Integer, ForeignKey('aluguel.id'))
     quantidade = Column(Integer, nullable=False)
+    total = Column(Float)
 
     cliente = relationship("Cliente", back_populates="itens_carrinho")
     produto = relationship("Produto")

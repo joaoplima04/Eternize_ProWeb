@@ -61,7 +61,6 @@
     <p><strong>Telefone(s):</strong> {{ cliente_telefone }}</p>
 
     <p><strong>Data do Pedido:</strong> {{ data_pedido }}</p>
-    <p><strong>Data de Confirmação:</strong> {{ data_confirmacao }}</p>
     <p><strong>Início Locação:</strong> {{ inicio_locacao }}</p>
     <p><strong>Término Locação:</strong> {{ termino_locacao }}</p>
     <p><strong>Objetivo da Locação:</strong> {{ objetivo_locacao }}</p>
@@ -71,11 +70,39 @@
     <p><strong>Devolução:</strong> {{ data_devolucao }} às {{ hora_devolucao }}</p>
 
     <h2>LISTA DE ITENS</h2>
-    <ul>
-        {% for item in itens %}
-            <li><strong>{{ item.nome }}</strong> - Quantidade: {{ item.quantidade }} - Preço Unitário: R$ {{ item.preco_unitario }} - Total: R$ {{ item.total }}</li>
-        {% endfor %}
-    </ul>
+    <table class="table-container">
+        <thead>
+            <tr>
+                <th>IMAGEM</th>
+                <th>ITEM</th>
+                <th>QTD</th>
+                <th>PREÇO UNID (R$)</th>
+                <th>TOTAL (R$)</th>
+                <th>REPOSIÇÃO UNID (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in itens %}
+            <tr>
+                <td><img src="{{ item.produto.imagem }}" alt="Imagem do produto"></td>
+                <td>{{ item.produto.nome }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>{{ item.produto.preco }}</td>
+                <td>{{ item.total }}</td>
+                <td>{{ item.produto.preco }}</td>
+            
+            {% endfor %}
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="total-section">
+        <tr>
+            <td colspan="4">SUBTOTAL DO PEDIDO (R$)</td>
+            <td>{{ preco_total_pedido }}</td>
+        </tr>
+    </table>
 
     <h2 class="clausulas">CLÁUSULAS DO CONTRATO</h2>
     <p><strong>LOCADORA:</strong> ETERNIZE LOCAÇÃO, representada por Rigomar Nunes Pereira Lima, situado na CLSW 504 – BLOCO B – LOJA 56 – SETOR SUDOESTE, na cidade de Brasília, CNPJ Nº 54.129.589.0001-51.</p>

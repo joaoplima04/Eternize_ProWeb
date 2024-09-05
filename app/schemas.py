@@ -57,6 +57,8 @@ class AluguelBase(BaseModel):
     cliente_cpf: str
     data_aluguel: date
     hora_inicial: str
+    data_pedido: date
+    objetivo: str
     data_devolucao: date
     hora_final: str
     preco_total: float

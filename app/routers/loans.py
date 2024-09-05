@@ -6,6 +6,8 @@ from ..database import get_db
 from fastapi import Form
 from typing import Optional
 from .. import schemas 
+from app.operacoes import gerar_contrato
+import datetime
 
 router = APIRouter()
 
@@ -16,6 +18,7 @@ def get_aluguel_form(
     hora_inicial: str = Form(...),
     data_devolucao: str = Form(...),
     hora_final: str = Form(...),
+    objetivo: str = Form(...),
     tipo_entrega: str = Form(...),
     cep: Optional[str] = Form(None),
     endereco: Optional[str] = Form(None),
@@ -45,6 +48,8 @@ def get_aluguel_form(
         hora_inicial=hora_inicial,
         data_devolucao=data_devolucao,
         hora_final=hora_final,
+        data_pedido=datetime.date.today(),
+        objetivo=objetivo,
         preco_total=0,
         tipo_entrega=tipo_entrega,
     )
@@ -69,6 +74,8 @@ def create_locacao(retorno = Depends(get_aluguel_form), db: Session = Depends(ge
 
     # Calcular o preço total do carrinho
     cart_total = crud.get_cart_total(db, cliente_cpf=cliente.cpf)
+
+    #Cal
     
     # Atualizar o preço total na locação
     new_aluguel.preco_total = cart_total
@@ -83,12 +90,20 @@ def create_locacao(retorno = Depends(get_aluguel_form), db: Session = Depends(ge
         crud.create_entrega(db=db, entrega=schemas.EntregaCreate(**entrega_data))
 
     cart_items = crud.get_cart_items(db, cliente_cpf=cliente.cpf)
-    print(cart_items)
+
     for item in cart_items:
         item.aluguel_id = new_aluguel.id
+        item.quantidade
+        # Calcula preço de cada item do pedido
+        preco_unitario = crud.get_preco_unitario(db=db, produto_id=item.produto_id)
+        item.total = preco_unitario * item.quantidade
         db.commit()
         db.refresh(item)
     
+    contrato = gerar_contrato(new_aluguel.id, db=db)
+    new_aluguel.contrato = contrato
+    db.commit()
+
     response = RedirectResponse("/messages/", status_code=303)
     response.set_cookie(key="message", value=f"Recebemos a sua locação {cliente.nome}! \n Metade do valor da locação deve ser abatido até um dia antes do início para a confirmação da locação. \n O contrato foi enviado por e-mail e deve ser assinado ao receber os itens. \n Qualquer dúvida, sinta-se a vontade de entrar em contato conosco por Whatsapp: 6199619-8023")
 

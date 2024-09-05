@@ -97,6 +97,7 @@ def update_produto(produto_id: int, produto: schemas.ProdutoCreate, db: Session 
 @router.get("/visualizar_locacoes/")
 def visualizar_locacoes(request: Request, db: Session = Depends(get_db)):
     locacoes = db.query(Aluguel).all()
+     
     return templates.TemplateResponse("admin/locacoes.html", {"request": request, "locacoes": locacoes})
 
 #Filtro date
