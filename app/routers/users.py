@@ -51,11 +51,12 @@ def create_cliente(cliente: schemas.ClienteCreate = Depends(get_cliente_form), d
         raise HTTPException(status_code=400, detail="CPF já registrado")
     new_cliente = crud.create_cliente(db=db, cliente=cliente)
 
-    access_token = auth.create_access_token(data={"sub": new_cliente.email}, expires_delta=timedelta(minutes=60))
+    access_token = auth.create_access_token(data={"sub": new_cliente.email}, expires_delta=timedelta(minutes=120))
+    new_cliente.acess_token = access_token[new_cliente.email]
     # Redireciona para a página principal com uma mensagem de boas-vindas
     response = RedirectResponse(url="/", status_code=303)
     response.set_cookie(key="cpf", value=new_cliente.cpf, httponly=True)
-    response.set_cookie(key="access_token", value=access_token, httponly=True)
+    response.set_cookie(key="access_token", value=access_token, httponly=True, expires=timedelta(minutes=120))
     response.set_cookie(key="Welcome_message", value=f"Bem vindo {new_cliente.nome}!", expires=timedelta(minutes=5))
     return response
 
@@ -77,7 +78,7 @@ def get_login(request: Request, db: Session = Depends(get_db)):
         }
         return templates.TemplateResponse("login.html", context)
     else:
-        # Trata o caso onde não há usuário logado ou o token é inválido
+        # Trata o caso onde não há usuário logado ou o token é inválido0
         context = {
             "request": request,
             "next": "/"
@@ -97,11 +98,11 @@ def login(email: str = Form(...), password: str = Form(...), next: str = Form(..
         response.set_cookie(key="error", value=f"senha incorreta", max_age=3600)
         return response
 
-    access_token = auth.create_access_token(data={"sub": user.email}, expires_delta=timedelta(minutes=60))
+    access_token = auth.create_access_token(data={"sub": user.email}, expires_delta=timedelta(minutes=120))
     response = RedirectResponse(url=next, status_code=303)
     response.set_cookie(key="cpf", value=user.cpf, httponly=True, max_age=3600)
     response.set_cookie(key="message", value=f"Bem vindo {user.nome}!", max_age=3600)
-    response.set_cookie(key="access_token", value=access_token, httponly=True, max_age=3600)
+    response.set_cookie(key="access_token", value=access_token, httponly=True, expires=timedelta(minutes=120))
     return response
 
 @router.get("/logout")

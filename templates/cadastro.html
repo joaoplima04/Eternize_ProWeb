@@ -9,10 +9,10 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Cadastro</h2>
-                        <form action="/users/cadastro_user" method="post">
+                        <form action="/users/cadastro_user" method="post" id="cadastro-form">
                             <div class="form-group">
                                 <label for="cpf">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" placeholder="Digite seu CPF" required>
+                                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="15" placeholder="Digite seu CPF" required>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Nome</label>
@@ -34,6 +34,11 @@
                                 <label for="password">Senha</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
                             </div>
+                            <div class="form-group">
+                                <label for="confirm_password">Confirme sua senha</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirme sua senha" required>
+                                <small id="passwordError" class="form-text text-danger" style="display: none;">As senhas não correspondem.</small>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
                         </form>
                         <div class="text-center mt-3">
@@ -44,4 +49,40 @@
             </div>
         </div>
     </div>
+    
+<script src="https://unpkg.com/imask"></script>
+<script>
+    // Mascara do CPF
+    var cpfElement = document.getElementById('cpf');
+    var maskOptions = {
+        mask: '000.000.000-00'
+    };
+    var mask = IMask(cpfElement, maskOptions);
+    // Mascara do telefone
+    var telefoneElement = document.getElementById('telefone');
+    var maskOptions2 = {
+        mask: '(00)00000-0000'
+    };
+    var mask2 = IMask(telefoneElement, maskOptions2);
+    // Verifica se as duas senhas são iguais antes do envio do formulário
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('cadastro-form');
+        form.addEventListener('submit', function(event) {
+            console.log("A função está sendo executada");
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+    
+            const errorMessage = document.getElementById('passwordError');
+            errorMessage.style.display = 'none';
+    
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'As senhas não correspondem.';
+                errorMessage.style.display = 'block';
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 {% endblock %}
+
+

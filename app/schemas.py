@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from typing import List, Optional
 from datetime import date
 from enum import Enum
@@ -46,12 +46,19 @@ class ClienteBase(BaseModel):
     telefone: str
     data_nascimento: date
 
+    @model_validator(mode="before")
+    def clean_cpf(cls, values):
+        if 'cpf' in values:
+            values['cpf'] = values['cpf'].replace('.', '').replace('-', '')
+        return values
+
 class ClienteCreate(ClienteBase):
     password: str
 
 class Cliente(ClienteBase):
     class Config:
         orm_mode = True
+
 
 class AluguelBase(BaseModel):
     cliente_cpf: str

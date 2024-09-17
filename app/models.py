@@ -47,6 +47,7 @@ class Cliente(Base):
     telefone = Column(String(20))
     data_nascimento = Column(Date)
     password = Column(String(128))
+    acess_token = Column(String, unique=True, nullable=True)
     superuser = Column(Boolean, default=False)
 
     itens_carrinho = relationship("ItemCarrinho", back_populates="cliente")
@@ -106,5 +107,5 @@ class Entrega(Base):
     aluguel = relationship("Aluguel", back_populates="entrega")
 
     def __repr__(self):
-        return f"<Entrega(aluguel_id={self.aluguel_id}, tipo_entrega='{self.tipo_entrega}')>"
+        return f"<Entrega(aluguel_id={self.aluguel_id})>"
 
