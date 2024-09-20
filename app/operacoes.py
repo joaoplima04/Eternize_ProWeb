@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 from .database import get_db, SessionLocal
 
+
 def gerar_contrato(aluguel_id, db: Session = Depends(get_db)):
     # Configurar Jinja2 para carregar o template
     env = Environment(loader=FileSystemLoader('.'))
@@ -36,6 +37,8 @@ def gerar_contrato(aluguel_id, db: Session = Depends(get_db)):
     HTML(string=html_content).write_pdf(contrato_path)
     
     return contrato_path
+
+
 
 
 

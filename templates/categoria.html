@@ -13,7 +13,7 @@
     <section class="cardsSection1">
         {% for produto in produtos %}
         <div class="cards">
-            <img src="{{ url_for('static', path=produto.imagem) }}" class="imagem2">
+            <img src="{{ produto.imagem }}" class="imagem2">
             <p class="dg">{{ produto.nome }}</p>
             <a href="#" class="btn btn-outline-warning" onclick="event.preventDefault(); addToCart({{ produto.id }});">Alugar</a>
         </div>

@@ -7,6 +7,7 @@ from .config import templates
 
 app = FastAPI()
 
+
 static_files_path = Path(__file__).parent / "static"
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -27,6 +28,8 @@ def get_message(request:Request):
         "message": message
     }
     return templates.TemplateResponse("messages.html", context)
+
+
 
 app.include_router(products.router, prefix="/produtos", tags=["products"])
 app.include_router(categories.router, prefix="/categories", tags=["categories"])

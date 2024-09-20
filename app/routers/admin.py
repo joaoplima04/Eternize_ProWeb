@@ -9,7 +9,14 @@ from ..config import templates
 from .. import schemas, crud
 from jinja2 import Environment
 from datetime import datetime
+import boto3
 
+s3 = boto3.client('s3')
+
+def upload_file_to_s3(file: UploadFile, bucket_name: str, key: str):
+    # Carregar o arquivo para o bucket S3
+    s3.upload_fileobj(file.file, bucket_name, key)
+    
 router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
@@ -31,9 +38,15 @@ def get_produto_form(
     publicado: bool = Form(...),    
 ) -> schemas.ProdutoCreate:
     if imagem:
-        imagem_path = f"static/imagens/{imagem.filename}"
-        with open(imagem_path, "wb") as buffer:
-            buffer.write(imagem.file.read())
+        # Defina o nome do bucket e o caminho onde a imagem será armazenada no S3
+        bucket_name = "eternize-bucket"
+        imagem_path = f"imagens/{imagem.filename}"
+        
+        # Faça o upload da imagem para o S3
+        upload_file_to_s3(imagem, bucket_name, imagem_path)
+
+        # Monta a URL completa da imagem
+        imagem_url = f"https://{bucket_name}.s3.amazonaws.com/{imagem_path}"
     else:
         imagem_path = None
 
@@ -42,7 +55,7 @@ def get_produto_form(
         categoria=categoria,
         preco=preco,
         quantidade_estoque=quantidade_estoque,
-        imagem=f"imagens/{imagem.filename}",
+        imagem=imagem_url,
         cor=cor,
         estilo=estilo,
         publicado=publicado
